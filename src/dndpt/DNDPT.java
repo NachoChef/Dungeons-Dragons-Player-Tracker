@@ -39,10 +39,7 @@ public class DNDPT {
     public static void main(String[] args) {
         // TODO code application logic here
         connect();
-        String sql = "SELECT name FROM class";
-        try (Connection conn = this.connect();
-             Statement stmt  = conn.createStatement();
-             ResultSet rs    = stmt.executeQuery(sql)){
+        
             
             // loop through the result set
             while (rs.next()) {
