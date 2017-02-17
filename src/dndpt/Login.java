@@ -45,14 +45,24 @@ public class Login extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Login"));
 
         txt_pword.setText("jPasswordField1");
+        txt_pword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_pwordActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Username: ");
 
-        txt_username.setText("jTextField1");
+        txt_username.setText("username");
 
         jLabel2.setText("Password:");
 
         cmd_login.setText("Login");
+        cmd_login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmd_loginActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -108,6 +118,15 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txt_pwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_pwordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_pwordActionPerformed
+
+    private void cmd_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_loginActionPerformed
+        if (txt_username.getText())
+            
+    }//GEN-LAST:event_cmd_loginActionPerformed
 
     /**
      * @param args the command line arguments
