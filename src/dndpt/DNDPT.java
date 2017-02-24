@@ -29,8 +29,8 @@ public class DNDPT {
                 if (conn != null) {
                     conn.close();
                 }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+            } catch (SQLException ef) {
+                System.out.println(ef.getMessage());
             }
         }
     }
