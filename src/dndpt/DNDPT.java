@@ -14,15 +14,16 @@ import java.sql.SQLException;
 
 public class DNDPT {
     
-    public static void connect() {
+    public static boolean connect() {
         Connection conn = null;
         try {
             String url = "jdbc:sqlite:dnd35.db";
             conn = DriverManager.getConnection(url);
-            System.out.println("Database connected.");
+            return true;
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            return false;
         } finally {
             try {
                 if (conn != null) {
