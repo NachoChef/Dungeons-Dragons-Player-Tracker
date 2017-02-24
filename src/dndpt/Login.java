@@ -13,7 +13,7 @@ import java.sql.*;
  * @author Justin
  */
 public class Login extends javax.swing.JFrame {
-    Connection conn = null;
+    Connection conn = DNDPT.conn;
     ResultSet rs = null;
     PreparedStatement pst = null;
     /**
@@ -21,7 +21,6 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        conn = DNDPT.conn;
         
     }
 
