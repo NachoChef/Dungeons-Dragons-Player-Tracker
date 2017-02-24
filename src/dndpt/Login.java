@@ -21,7 +21,8 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        conn = javaconnect.ConnectDb()
+        conn = DNDPT.conn;
+        
     }
 
     /**
@@ -140,7 +141,7 @@ public class Login extends javax.swing.JFrame {
         try {
             pst = conn.prepareStatement(sql);
             pst.setString(1, txt_username.getText());
-            pst.setString(1, txt_password.getText());
+            pst.setString(1, txt_pword.getText());
             rs = pst.executeQuery();
             if (rs.next()){
                 JOptionPane.showMessageDialog(null, "Login successful.");

@@ -7,30 +7,27 @@ package dndpt;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Justin
  */
 
 public class DNDPT {
-    
-    public static boolean connect() {
-        Connection conn = null;
-        try {
-            String url = "jdbc:sqlite:dnd35.db";
-            conn = DriverManager.getConnection(url);
-            return true;
-            
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return false;
+    public static Connection conn;
+    public static void setConnection(String username, String password){
+        try{
+            conn = DriverManager.getConnection("jdbc:sqlite:dnd35.db");
+            JOptionPane.showMessageDialog(null, "Success!");
+            //JOptionPane.setVisible(MainWindow);
+        } catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         } finally {
             try {
-                if (conn != null) {
+                if (conn != null)
                     conn.close();
-                }
             } catch (SQLException ef) {
-                System.out.println(ef.getMessage());
+                JOptionPane.showMessageDialog(null, ef.getMessage());
             }
         }
     }
@@ -39,9 +36,9 @@ public class DNDPT {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        connect();
+        setConnection("test", "test");
         
-            
+            /*
             // loop through the result set
             while (rs.next()) {
                 System.out.println(rs.getInt("id") +  "\t" + 
@@ -50,7 +47,7 @@ public class DNDPT {
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }
+        }*/
     }
     
 }
