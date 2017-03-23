@@ -7,7 +7,7 @@ package dndpt;
 import javax.swing.*;
 import java.awt.*;
 import java.sql.*;
-
+//import org.apache.commons.codec.digest.DigestUtils;
 /**
  *
  * @author Justin
@@ -139,15 +139,15 @@ public class Login extends javax.swing.JFrame {
         String sql ="select * from player where username=? and password=?";
         try{
             pst = conn.prepareStatement(sql);
+            //String pword = sha1Hex(txt_pword.getText());
             pst.setString(1,txt_username.getText());
             pst.setString(2,txt_pword.getText());
             rs=pst.executeQuery();
             if(rs.next()){
+                new MainWindow(txt_username.getText());
                 JOptionPane.showMessageDialog(null, "Login Successful!");
                 rs.close();
                 pst.close();
-                this.setVisible(false);
-                MainWindow.setVisible();
             } else {
                 JOptionPane.showMessageDialog(null, "Unable to login.");
             }

@@ -46,6 +46,10 @@ public class Create_Char extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    public static void setVisible() {
+        new Create_Char().setVisible(true);
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
