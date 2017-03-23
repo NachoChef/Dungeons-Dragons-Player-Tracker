@@ -13,7 +13,7 @@ import java.sql.*;
  * @author Justin
  */
 public class Login extends javax.swing.JFrame {
-    Connection conn = DNDPT.conn;
+    Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
     /**
@@ -21,7 +21,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        
+        conn = JavaConn.ConnectDb();
     }
 
     /**
@@ -136,18 +136,31 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_pwordActionPerformed
 
     private void cmd_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_loginActionPerformed
-        String sql = "SELECT * FROM player_info WHERE username = ? and password = ?";
-        try {
+        String sql ="select * from player where username=? and password=?";
+        try{
             pst = conn.prepareStatement(sql);
-            pst.setString(1, txt_username.getText());
-            pst.setString(1, txt_pword.getText());
-            rs = pst.executeQuery();
-            if (rs.next()){
-                JOptionPane.showMessageDialog(null, "Login successful.");
+            pst.setString(1,txt_username.getText());
+            pst.setString(2,txt_pword.getText());
+            rs=pst.executeQuery();
+            if(rs.next()){
+                JOptionPane.showMessageDialog(null, "Login Successful!");
+                rs.close();
+                pst.close();
+                this.setVisible(false);
+                MainWindow.setVisible();
+            } else {
+                JOptionPane.showMessageDialog(null, "Unable to login.");
             }
         }
-        catch (Exception e){
-            JOptionPane.showMessageDialog(null, e);
+        catch(Exception e)
+        {
+           JOptionPane.showMessageDialog(null, e);
+        } 
+        finally {
+            try{
+                rs.close();
+                pst.close();
+            } catch(Exception e) {}
         }
             
     }//GEN-LAST:event_cmd_loginActionPerformed

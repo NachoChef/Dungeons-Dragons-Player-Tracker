@@ -16,6 +16,7 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public MainWindow() {
         initComponents();
+        this.setVisible(false);
     }
 
     /**
@@ -35,6 +36,7 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -109,6 +111,19 @@ public class MainWindow extends javax.swing.JFrame {
 
         charPane.addTab("Characters", jPanel2);
 
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1019, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1432, Short.MAX_VALUE)
+        );
+
+        charPane.addTab("Admin", jPanel4);
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -134,6 +149,10 @@ public class MainWindow extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    public static void setVisible() {
+        new MainWindow().setVisible(true);
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -179,5 +198,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 }

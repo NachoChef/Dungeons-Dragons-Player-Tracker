@@ -36,8 +36,7 @@ public class DNDPT {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        setConnection("test", "test");
-        
+        new Login().setVisible(true);        
             /*
             // loop through the result set
             while (rs.next()) {
