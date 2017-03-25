@@ -5,12 +5,11 @@
  */
 package dndpt;
 import javax.swing.*;
-import java.awt.*;
 import java.sql.*;
 //import org.apache.commons.codec.digest.DigestUtils;
 /**
  *
- * @author Justin
+ * @author Justin Jones
  */
 public class Login extends javax.swing.JFrame {
     Connection conn = null;
@@ -138,13 +137,22 @@ public class Login extends javax.swing.JFrame {
     private void cmd_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_loginActionPerformed
         String sql ="select * from player where username=? and password=?";
         try{
+            //prepares a statement looking for matching values in player
             pst = conn.prepareStatement(sql);
             //String pword = sha1Hex(txt_pword.getText());
             pst.setString(1,txt_username.getText());
             pst.setString(2,txt_pword.getText());
-            rs=pst.executeQuery();
+            rs = pst.executeQuery();
             if(rs.next()){
-                new MainWindow(txt_username.getText());
+                //if entry exists, we need pid and permissions to give to mainWindow
+                //to set permissions
+                sql = "select * from player where username =?";
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, txt_username.getText());
+                rs = pst.executeQuery();
+                int pid = rs.getInt("pid");
+                boolean admin = (rs.getInt("isAdmin") == 1);
+                new MainWindow(txt_username.getText(), pid, admin);
                 JOptionPane.showMessageDialog(null, "Login Successful!");
                 rs.close();
                 pst.close();

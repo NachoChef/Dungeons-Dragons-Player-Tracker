@@ -1,12 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class includes all MainWindow components, and is launched by Login
+ * Holds global variables for user identification, permissions
  */
 package dndpt;
 
 import javax.swing.*;
-import java.awt.*;
 import java.sql.*;
 
 /**
@@ -15,18 +13,25 @@ import java.sql.*;
  */
 public class MainWindow extends javax.swing.JFrame {
     String uname;
+    boolean isAdmin = false;
+    int pid;
+    
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
     /**
-     * Creates new form NewJFrame
+     * Initializes the MainWindow and sets global variables
      */
-    public MainWindow(String uname) {
+    public MainWindow(String uname, int pid, boolean isAdmin) {
         initComponents();
         this.uname = uname;
+        this.isAdmin = isAdmin;
+        this.pid = pid;
         this.setTitle("User: " + uname);
         this.setVisible(true);
-        
+        if (!this.isAdmin)
+            this.tabbedPane.setEnabledAt(3, false);
+        //initComponents();
     }
 
     /**
@@ -38,7 +43,7 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        charPane = new javax.swing.JTabbedPane();
+        tabbedPane = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -47,7 +52,8 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
+        adminPanel = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -94,7 +100,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap(246, Short.MAX_VALUE))
         );
 
-        charPane.addTab("Overview", jPanel1);
+        tabbedPane.addTab("Overview", jPanel1);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -107,7 +113,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGap(0, 581, Short.MAX_VALUE)
         );
 
-        charPane.addTab("Quick Build", jPanel3);
+        tabbedPane.addTab("Quick Build", jPanel3);
 
         jButton1.setText("Create Character");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -133,20 +139,28 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap(547, Short.MAX_VALUE))
         );
 
-        charPane.addTab("Characters", jPanel2);
+        tabbedPane.addTab("Characters", jPanel2);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1019, Short.MAX_VALUE)
+        jLabel5.setText("jLabel5");
+
+        javax.swing.GroupLayout adminPanelLayout = new javax.swing.GroupLayout(adminPanel);
+        adminPanel.setLayout(adminPanelLayout);
+        adminPanelLayout.setHorizontalGroup(
+            adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(adminPanelLayout.createSequentialGroup()
+                .addGap(359, 359, 359)
+                .addComponent(jLabel5)
+                .addContainerGap(692, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 581, Short.MAX_VALUE)
+        adminPanelLayout.setVerticalGroup(
+            adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(adminPanelLayout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(jLabel5)
+                .addContainerGap(508, Short.MAX_VALUE))
         );
 
-        charPane.addTab("Admin", jPanel4);
+        tabbedPane.addTab("Admin", adminPanel);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -160,11 +174,11 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(charPane)
+            .addComponent(tabbedPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(charPane)
+            .addComponent(tabbedPane)
         );
 
         pack();
@@ -180,9 +194,9 @@ public class MainWindow extends javax.swing.JFrame {
             pst = conn.prepareStatement(sql);
             pst.setString(1,user);
             rs = pst.executeQuery();
-            if(rs.next()){          //if there are characters
-                //put them into the panel
-                
+            if(rs.next()){          //if there are characters for pid, then
+                //we should put them into the character panel display
+                //TODO
                 rs.close();
                 pst.close();
             } else {
@@ -200,61 +214,21 @@ public class MainWindow extends javax.swing.JFrame {
             } catch(Exception e) {}
         }
     }
-    
-    /**
-     * @param args the command line arguments
-     */
-   /* public static void setVisible(String uname) {
-        
-        new MainWindow.setVisible(uname);
-    }*/
-    
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainWindow("test").setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTabbedPane charPane;
+    private javax.swing.JPanel adminPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JTabbedPane tabbedPane;
     // End of variables declaration//GEN-END:variables
 }

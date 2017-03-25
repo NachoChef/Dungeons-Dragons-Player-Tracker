@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Main class that initiates the program
+ * 
  */
 package dndpt;
 import java.sql.Connection;
@@ -10,7 +9,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 /**
  *
- * @author Justin
+ * @author Justin Jones
  */
 
 public class DNDPT {
@@ -19,7 +18,6 @@ public class DNDPT {
         try{
             conn = DriverManager.getConnection("jdbc:sqlite:dnd35.db");
             JOptionPane.showMessageDialog(null, "Success!");
-            //JOptionPane.setVisible(MainWindow);
         } catch(SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         } finally {
@@ -35,18 +33,8 @@ public class DNDPT {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        new Login().setVisible(true);        
-            /*
-            // loop through the result set
-            while (rs.next()) {
-                System.out.println(rs.getInt("id") +  "\t" + 
-                                   rs.getString("name") + "\t" +
-                                   rs.getDouble("capacity"));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }*/
+        //initialize the login window
+        new Login().setVisible(true);
     }
     
 }
