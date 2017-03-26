@@ -194,7 +194,6 @@ public class Login extends javax.swing.JFrame {
             try{
                 rs.close();
                 pst.close();
-                conn.close();
             } catch(Exception e) {}
         }
             
