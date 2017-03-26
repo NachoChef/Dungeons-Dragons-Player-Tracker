@@ -5,6 +5,7 @@
 package dndpt;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 
 /**
@@ -27,11 +28,14 @@ public class MainWindow extends javax.swing.JFrame {
         this.uname = uname;
         this.isAdmin = isAdmin;
         this.pid = pid;
-        this.setTitle("User: " + uname);
+        currentPlayerLabel.setText(String.valueOf("Logged in as: " + uname));
         this.setVisible(true);
+        //disable admin pane if not admin
+        //test to add entries to JTable:
+        //DefaultTableModel model = (DefaultTableModel) charTable.getModel();
+        //model.addRow(new String[]{"test"});
         if (!this.isAdmin)
             this.tabbedPane.setEnabledAt(3, false);
-        //initComponents();
     }
 
     /**
@@ -45,10 +49,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         tabbedPane = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        currentPlayerLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        charTable = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -56,49 +61,68 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
+        logoutMenu = new javax.swing.JMenuItem();
         exitItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("player list");
-
-        jLabel2.setText("character list");
-
         jLabel3.setText("last session");
 
         jLabel4.setText("random db stats (item count, player/char count, etc)");
+
+        currentPlayerLabel.setText("Active login:");
+
+        charTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Your characters:"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(charTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
+                    .addComponent(currentPlayerLabel)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(173, 173, 173)
-                        .addComponent(jLabel2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(407, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(359, 359, 359))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(103, 103, 103)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(273, 273, 273)
+                        .addComponent(jLabel4)))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(124, 124, 124)
+                .addContainerGap()
+                .addComponent(currentPlayerLabel)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(170, 170, 170)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(63, 63, 63)
                 .addComponent(jLabel4)
-                .addGap(79, 79, 79)
-                .addComponent(jLabel3)
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addContainerGap(204, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Overview", jPanel1);
@@ -107,11 +131,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1019, Short.MAX_VALUE)
+            .addGap(0, 762, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 581, Short.MAX_VALUE)
+            .addGap(0, 501, Short.MAX_VALUE)
         );
 
         tabbedPane.addTab("Quick Build", jPanel3);
@@ -130,14 +154,14 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1)
-                .addContainerGap(892, Short.MAX_VALUE))
+                .addContainerGap(608, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1)
-                .addContainerGap(547, Short.MAX_VALUE))
+                .addContainerGap(466, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Characters", jPanel2);
@@ -151,19 +175,27 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(adminPanelLayout.createSequentialGroup()
                 .addGap(359, 359, 359)
                 .addComponent(jLabel5)
-                .addContainerGap(692, Short.MAX_VALUE))
+                .addContainerGap(358, Short.MAX_VALUE))
         );
         adminPanelLayout.setVerticalGroup(
             adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminPanelLayout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addComponent(jLabel5)
-                .addContainerGap(508, Short.MAX_VALUE))
+                .addContainerGap(422, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Admin", adminPanel);
 
         fileMenu.setText("File");
+
+        logoutMenu.setText("Logout");
+        logoutMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutMenuActionPerformed(evt);
+            }
+        });
+        fileMenu.add(logoutMenu);
 
         exitItem.setText("Exit");
         exitItem.addActionListener(new java.awt.event.ActionListener() {
@@ -201,16 +233,24 @@ public class MainWindow extends javax.swing.JFrame {
     private void exitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitItemActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitItemActionPerformed
+
+    private void logoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutMenuActionPerformed
+        this.setVisible(false);
+        new Login().setVisible(true);
+    }//GEN-LAST:event_logoutMenuActionPerformed
     
     public void getChars (String user) {
-        String sql ="select characters from player where username=?";
+        String sql ="select name from characters where username=?";
         try{
             pst = conn.prepareStatement(sql);
             pst.setString(1,user);
             rs = pst.executeQuery();
+            //charTable.setModel(DbUtils.resultSetToTableModel(rs))
             if(rs.next()){          //if there are characters for pid, then
                 //we should put them into the character panel display
                 //TODO
+                DefaultTableModel model = (DefaultTableModel) charTable.getModel();
+                model.addRow(new String[]{"test"});
                 rs.close();
                 pst.close();
             } else {
@@ -231,12 +271,12 @@ public class MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel adminPanel;
+    private javax.swing.JTable charTable;
+    private javax.swing.JLabel currentPlayerLabel;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -244,6 +284,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenuItem logoutMenu;
     private javax.swing.JTabbedPane tabbedPane;
     // End of variables declaration//GEN-END:variables
 }
