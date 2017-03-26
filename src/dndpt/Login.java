@@ -178,11 +178,10 @@ public class Login extends javax.swing.JFrame {
                 int pid = rs.getInt("pid");
                 boolean admin = (rs.getInt("isAdmin") == 1);
                 this.setVisible(false);
-                new MainWindow(txt_username.getText(), pid, admin);
+                new MainWindow(txt_username.getText(), pid, admin, conn);
                 JOptionPane.showMessageDialog(null, "Login Successful!");
                 rs.close();
                 pst.close();
-                conn.close();
             } else {
                 JOptionPane.showMessageDialog(null, "Unable to login.");
             }

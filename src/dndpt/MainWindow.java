@@ -26,7 +26,7 @@ public class MainWindow extends javax.swing.JFrame {
     /**
      * Initializes the MainWindow and sets global variables
      */
-    public MainWindow(String uname, int pid, boolean isAdmin) {
+    public MainWindow(String uname, int pid, boolean isAdmin, Connection conn) {
         initComponents();
         this.uname = uname;
         this.isAdmin = isAdmin;
@@ -39,7 +39,7 @@ public class MainWindow extends javax.swing.JFrame {
         //model.addRow(new String[]{"test", "test"});
         if (!this.isAdmin)
             this.tabbedPane.setEnabledAt(3, false);
-        conn = JavaConn.ConnectDb();
+        this.conn = conn;
         this.getChars(pid);
         
     }
@@ -310,6 +310,11 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void logoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutMenuActionPerformed
         this.setVisible(false);
+        try {
+            conn.close();
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
         new Login().setVisible(true);
     }//GEN-LAST:event_logoutMenuActionPerformed
 
@@ -330,6 +335,8 @@ public class MainWindow extends javax.swing.JFrame {
             rs = pst.executeQuery();
             if(rs.next()){       
                 DefaultTableModel model = (DefaultTableModel) table.getModel();
+                //looping through a ResultSet should be done with a do/while loop
+                //otherwise you miss the first result
                 do {
                     model.addRow(new String[]{Integer.toString(rs.getInt("cid")), rs.getString("name")});
                 } while(rs.next()); 

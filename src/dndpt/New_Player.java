@@ -16,6 +16,7 @@ import java.sql.*;
 public class New_Player extends javax.swing.JFrame {
     Connection conn;
     PreparedStatement pst;
+    boolean playerAdmin = false;
     /**
      * Creates new form New_Player
      */
@@ -43,6 +44,7 @@ public class New_Player extends javax.swing.JFrame {
         pword2 = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
         createButton = new javax.swing.JButton();
+        isAdminBtn = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -66,6 +68,13 @@ public class New_Player extends javax.swing.JFrame {
             }
         });
 
+        isAdminBtn.setText("Admin");
+        isAdminBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                isAdminBtnActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
 
         jMenuItem1.setText("Cancel");
@@ -85,31 +94,29 @@ public class New_Player extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(pword1)
-                                .addComponent(pword2))
-                            .addComponent(playerName)
-                            .addComponent(userName)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel5))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(89, 89, 89)
-                                .addComponent(createButton)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(pword1)
+                    .addComponent(pword2)
+                    .addComponent(playerName)
+                    .addComponent(userName))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(120, 120, 120)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(isAdminBtn)
+                    .addComponent(createButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(42, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,9 +139,11 @@ public class New_Player extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(pword2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(isAdminBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(createButton)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -145,12 +154,16 @@ public class New_Player extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Username and password do not match.");
         } else {
           int success = 0;
-          String sql = "insert into player (name, username, password, isAdmin) values (?, ?, ?, 0)"; 
+          String sql = "insert into player (name, username, password, isAdmin) values (?, ?, ?, ?)"; 
           try{
             pst = conn.prepareStatement(sql);
             pst.setString(1, playerName.getText());
             pst.setString(2, userName.getText());
             pst.setString(3, SHA(pword1.getText()));
+            if (!this.playerAdmin)
+                pst.setString(4, "0");
+            else
+                pst.setString(4, "1");
             success = pst.executeUpdate();
             } catch(Exception e)
             {
@@ -161,7 +174,7 @@ public class New_Player extends javax.swing.JFrame {
                 } catch(Exception e) {}
             }
           this.setVisible(false);
-          if (success != 0)
+          if (success != 0) //if any tuples were updated (i.e. insertion)
               JOptionPane.showMessageDialog(this, "Player successfully added.");
         }
             
@@ -170,6 +183,10 @@ public class New_Player extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void isAdminBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_isAdminBtnActionPerformed
+        playerAdmin = !playerAdmin;
+    }//GEN-LAST:event_isAdminBtnActionPerformed
 
     public String SHA(String sha) {
         try {
@@ -191,6 +208,7 @@ public class New_Player extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createButton;
+    private javax.swing.JCheckBox isAdminBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
