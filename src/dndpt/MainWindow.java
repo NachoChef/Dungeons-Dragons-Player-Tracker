@@ -35,8 +35,6 @@ public class MainWindow extends javax.swing.JFrame {
         this.setVisible(true);
         //disable admin pane if not admin
         //test to add entries to JTable:
-        //DefaultTableModel model = (DefaultTableModel) charTable.getModel();
-        //model.addRow(new String[]{"test", "test"});
         if (!this.isAdmin)
             this.tabbedPane.setEnabledAt(3, false);
         this.conn = conn;
@@ -66,9 +64,13 @@ public class MainWindow extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         adminPanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        createPlayer = new javax.swing.JButton();
+        playerPane = new javax.swing.JTabbedPane();
+        jPanel6 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         playerTable = new javax.swing.JTable();
-        createPlayer = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        playerNameMenu = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         logoutMenu = new javax.swing.JMenuItem();
@@ -77,6 +79,12 @@ public class MainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dungeons & Dragons Player Tracker");
+
+        tabbedPane.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tabbedPaneFocusGained(evt);
+            }
+        });
 
         jLabel3.setText("last session");
 
@@ -195,14 +203,30 @@ public class MainWindow extends javax.swing.JFrame {
 
         tabbedPane.addTab("Characters", jPanel2);
 
+        adminPanel.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                adminPanelFocusGained(evt);
+            }
+        });
+
         jLabel5.setText("jLabel5");
+
+        createPlayer.setText("New Player");
+        createPlayer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createPlayerActionPerformed(evt);
+            }
+        });
+
+        playerPane.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                playerPaneFocusGained(evt);
+            }
+        });
 
         playerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "# Characters"
@@ -219,44 +243,72 @@ public class MainWindow extends javax.swing.JFrame {
         jScrollPane2.setViewportView(playerTable);
         if (playerTable.getColumnModel().getColumnCount() > 0) {
             playerTable.getColumnModel().getColumn(0).setMinWidth(20);
-            playerTable.getColumnModel().getColumn(0).setPreferredWidth(20);
+            playerTable.getColumnModel().getColumn(0).setPreferredWidth(22);
             playerTable.getColumnModel().getColumn(0).setMaxWidth(25);
         }
 
-        createPlayer.setText("New Player");
-        createPlayer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createPlayerActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        playerPane.addTab("Players", jPanel6);
+
+        playerNameMenu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(playerNameMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 294, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(playerNameMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 468, Short.MAX_VALUE))
+        );
+
+        playerPane.addTab("Characters", jPanel4);
 
         javax.swing.GroupLayout adminPanelLayout = new javax.swing.GroupLayout(adminPanel);
         adminPanel.setLayout(adminPanelLayout);
         adminPanelLayout.setHorizontalGroup(
             adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(adminPanelLayout.createSequentialGroup()
-                        .addGap(92, 92, 92)
+                        .addGap(363, 363, 363)
                         .addComponent(jLabel5))
                     .addGroup(adminPanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(289, 289, 289)
                         .addComponent(createPlayer)))
-                .addContainerGap(358, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(playerPane))
         );
         adminPanelLayout.setVerticalGroup(
             adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(adminPanelLayout.createSequentialGroup()
-                        .addComponent(createPlayer)
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel5))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(238, Short.MAX_VALUE))
+                .addComponent(createPlayer)
+                .addGap(28, 28, 28)
+                .addComponent(jLabel5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(playerPane)
         );
 
         tabbedPane.addTab("Admin", adminPanel);
@@ -321,6 +373,18 @@ public class MainWindow extends javax.swing.JFrame {
     private void createPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createPlayerActionPerformed
         new New_Player(conn).setVisible(true);
     }//GEN-LAST:event_createPlayerActionPerformed
+
+    private void tabbedPaneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tabbedPaneFocusGained
+        
+    }//GEN-LAST:event_tabbedPaneFocusGained
+
+    private void playerPaneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_playerPaneFocusGained
+        
+    }//GEN-LAST:event_playerPaneFocusGained
+
+    private void adminPanelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_adminPanelFocusGained
+        getPlayers(this.playerTable);
+    }//GEN-LAST:event_adminPanelFocusGained
     
     /**
      * 
@@ -361,6 +425,38 @@ public class MainWindow extends javax.swing.JFrame {
         getChars (pid, charTable);
     }
     
+    
+    /**
+     * populates overall player stats for admin use
+     * @param table the table to write the data to
+     */
+    public void getPlayers (JTable table) {
+        String sql ="select player.pid, player.name, count(character.cid) from player, character where character.pid = player.pid group by player.pid";
+        try{
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if(rs.next()){       
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                //looping through a ResultSet should be done with a do/while loop
+                //otherwise you miss the first result
+                do {
+                    model.addRow(new String[]{Integer.toString(rs.getInt("cid")), rs.getString("name"), Integer.toString(rs.getInt("count(cid)"))});
+                } while(rs.next()); 
+                rs.close();
+                pst.close();
+            }
+        }
+        catch(Exception e)
+        {
+           JOptionPane.showMessageDialog(null, e);
+        } 
+        finally {
+            try{
+                rs.close();
+                pst.close();
+            } catch(Exception e) {}
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel adminPanel;
@@ -379,9 +475,13 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JMenuItem logoutMenu;
+    private javax.swing.JComboBox<String> playerNameMenu;
+    private javax.swing.JTabbedPane playerPane;
     private javax.swing.JTable playerTable;
     private javax.swing.JTabbedPane tabbedPane;
     // End of variables declaration//GEN-END:variables
