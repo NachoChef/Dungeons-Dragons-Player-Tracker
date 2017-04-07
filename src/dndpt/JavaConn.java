@@ -5,7 +5,7 @@ package dndpt;
 
 /**
  *
- * @author Justin
+ * @author Justin jones
  */
 import java.sql.*;
 import javax.swing.*;

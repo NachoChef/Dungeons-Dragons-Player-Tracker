@@ -10,7 +10,7 @@ import java.sql.*;
 
 /**
  *
- * @author Justin
+ * @author Justin Jones
  */
 public class MainWindow extends javax.swing.JFrame {
     //global user identifier fields
@@ -59,9 +59,12 @@ public class MainWindow extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         charTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
         adminPanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         createPlayer = new javax.swing.JButton();
@@ -77,14 +80,18 @@ public class MainWindow extends javax.swing.JFrame {
         queryField = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         searchTable = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         logoutMenu = new javax.swing.JMenuItem();
         exitItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dungeons & Dragons Player Tracker");
+        setPreferredSize(new java.awt.Dimension(685, 614));
 
         tabbedPane.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -92,11 +99,20 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setRequestFocusEnabled(false);
+        jPanel1.setLayout(null);
+
         jLabel3.setText("last session");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(361, 195, 55, 14);
 
         jLabel4.setText("random db stats (item count, player/char count, etc)");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(301, 282, 253, 14);
 
         currentPlayerLabel.setText("Active login:");
+        jPanel1.add(currentPlayerLabel);
+        currentPlayerLabel.setBounds(28, 11, 59, 14);
 
         charTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,67 +137,42 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        charTable.setCellSelectionEnabled(true);
+        charTable.setOpaque(false);
+        charTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(charTable);
+        charTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (charTable.getColumnModel().getColumnCount() > 0) {
-            charTable.getColumnModel().getColumn(0).setMinWidth(20);
-            charTable.getColumnModel().getColumn(0).setPreferredWidth(20);
+            charTable.getColumnModel().getColumn(0).setMinWidth(22);
+            charTable.getColumnModel().getColumn(0).setPreferredWidth(22);
             charTable.getColumnModel().getColumn(0).setMaxWidth(35);
             charTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        jLabel1.setText("Your characters:");
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(28, 64, 230, 190);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(currentPlayerLabel)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(103, 103, 103)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(273, 273, 273)
-                        .addComponent(jLabel4)))
-                .addContainerGap(131, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(currentPlayerLabel)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(28, 28, 28)
-                .addComponent(jLabel4)
-                .addContainerGap(318, Short.MAX_VALUE))
-        );
+        jLabel1.setText("Your characters:");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(28, 44, 80, 14);
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/winter_mountain_painting-wallpaper-2560x1600.jpg"))); // NOI18N
+        jLabel7.setText("jLabel7");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(0, 0, 760, 620);
 
         tabbedPane.addTab("Overview", jPanel1);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 762, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 614, Short.MAX_VALUE)
-        );
+        jPanel3.setLayout(null);
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/215073.png"))); // NOI18N
+        jLabel8.setText("jLabel8");
+        jPanel3.add(jLabel8);
+        jLabel8.setBounds(0, 0, 770, 620);
 
         tabbedPane.addTab("Quick Build", jPanel3);
+
+        jPanel2.setLayout(null);
 
         jButton1.setText("Create Character");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -189,23 +180,13 @@ public class MainWindow extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel2.add(jButton1);
+        jButton1.setBounds(10, 11, 117, 23);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addContainerGap(608, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addContainerGap(580, Short.MAX_VALUE))
-        );
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/dungeons-and-dragons-wallpaper-HD5-1.jpg"))); // NOI18N
+        jLabel10.setText("jLabel10");
+        jPanel2.add(jLabel10);
+        jLabel10.setBounds(0, 0, 770, 630);
 
         tabbedPane.addTab("Characters", jPanel2);
 
@@ -214,8 +195,11 @@ public class MainWindow extends javax.swing.JFrame {
                 adminPanelFocusGained(evt);
             }
         });
+        adminPanel.setLayout(null);
 
         jLabel5.setText("jLabel5");
+        adminPanel.add(jLabel5);
+        jLabel5.setBounds(363, 62, 34, 14);
 
         createPlayer.setText("New Player");
         createPlayer.addActionListener(new java.awt.event.ActionListener() {
@@ -223,7 +207,10 @@ public class MainWindow extends javax.swing.JFrame {
                 createPlayerActionPerformed(evt);
             }
         });
+        adminPanel.add(createPlayer);
+        createPlayer.setBounds(289, 11, 87, 23);
 
+        playerPane.setOpaque(true);
         playerPane.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 playerPaneFocusGained(evt);
@@ -291,11 +278,20 @@ public class MainWindow extends javax.swing.JFrame {
 
         playerPane.addTab("Characters", jPanel4);
 
+        adminPanel.add(playerPane);
+        playerPane.setBounds(458, 0, 304, 614);
+
         tableCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "character", "class", "class_table", "domain", "equipment", "feat", "item", "monster", "player", "power", "skill", "spell" }));
+        adminPanel.add(tableCombo);
+        tableCombo.setBounds(28, 150, 78, 20);
 
         jLabel2.setText("Search:");
+        adminPanel.add(jLabel2);
+        jLabel2.setBounds(28, 104, 37, 14);
 
         jLabel6.setText("table:");
+        adminPanel.add(jLabel6);
+        jLabel6.setBounds(28, 129, 28, 14);
 
         queryField.setText("query");
         queryField.addActionListener(new java.awt.event.ActionListener() {
@@ -303,6 +299,8 @@ public class MainWindow extends javax.swing.JFrame {
                 queryFieldActionPerformed(evt);
             }
         });
+        adminPanel.add(queryField);
+        queryField.setBounds(132, 150, 120, 20);
 
         searchTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -327,53 +325,16 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        searchTable.setOpaque(false);
         jScrollPane3.setViewportView(searchTable);
 
-        javax.swing.GroupLayout adminPanelLayout = new javax.swing.GroupLayout(adminPanel);
-        adminPanel.setLayout(adminPanelLayout);
-        adminPanelLayout.setHorizontalGroup(
-            adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(adminPanelLayout.createSequentialGroup()
-                .addGroup(adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(adminPanelLayout.createSequentialGroup()
-                        .addGap(363, 363, 363)
-                        .addComponent(jLabel5))
-                    .addGroup(adminPanelLayout.createSequentialGroup()
-                        .addGap(289, 289, 289)
-                        .addComponent(createPlayer))
-                    .addGroup(adminPanelLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(adminPanelLayout.createSequentialGroup()
-                                .addComponent(tableCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(queryField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel6)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(61, 61, 61)
-                .addComponent(playerPane))
-        );
-        adminPanelLayout.setVerticalGroup(
-            adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(adminPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(createPlayer)
-                .addGap(28, 28, 28)
-                .addComponent(jLabel5)
-                .addGap(28, 28, 28)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
-                .addGap(7, 7, 7)
-                .addGroup(adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tableCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(queryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(playerPane)
-        );
+        adminPanel.add(jScrollPane3);
+        jScrollPane3.setBounds(28, 188, 359, 257);
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/8bee769501b95f549f994ec494187f50.png"))); // NOI18N
+        jLabel9.setText("jLabel9");
+        adminPanel.add(jLabel9);
+        jLabel9.setBounds(0, -60, 910, 730);
 
         tabbedPane.addTab("Admin", adminPanel);
 
@@ -400,17 +361,29 @@ public class MainWindow extends javax.swing.JFrame {
         editMenu.setText("Edit");
         jMenuBar1.add(editMenu);
 
+        jMenu1.setText("Connect");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
+
+        jMenuItem1.setText("Remote database");
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabbedPane)
+            .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabbedPane)
+            .addComponent(tabbedPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
         );
 
         pack();
@@ -454,6 +427,10 @@ public class MainWindow extends javax.swing.JFrame {
         this.search(this.queryField.getText(), this.tableCombo.getSelectedItem().toString(), this.searchTable);
                 
     }//GEN-LAST:event_queryFieldActionPerformed
+
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        new remote_db();
+    }//GEN-LAST:event_jMenu1ActionPerformed
     
     /**
      * 
@@ -565,12 +542,18 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu fileMenu;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
