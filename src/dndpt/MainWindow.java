@@ -71,6 +71,12 @@ public class MainWindow extends javax.swing.JFrame {
         playerTable = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         playerNameMenu = new javax.swing.JComboBox<>();
+        tableCombo = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        queryField = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        searchTable = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         logoutMenu = new javax.swing.JMenuItem();
@@ -159,7 +165,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(28, 28, 28)
                 .addComponent(jLabel4)
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addContainerGap(318, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Overview", jPanel1);
@@ -172,7 +178,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 511, Short.MAX_VALUE)
+            .addGap(0, 614, Short.MAX_VALUE)
         );
 
         tabbedPane.addTab("Quick Build", jPanel3);
@@ -198,7 +204,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1)
-                .addContainerGap(476, Short.MAX_VALUE))
+                .addContainerGap(580, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Characters", jPanel2);
@@ -253,14 +259,14 @@ public class MainWindow extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -274,16 +280,54 @@ public class MainWindow extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(playerNameMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 294, Short.MAX_VALUE))
+                .addGap(0, 243, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(playerNameMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 468, Short.MAX_VALUE))
+                .addGap(0, 566, Short.MAX_VALUE))
         );
 
         playerPane.addTab("Characters", jPanel4);
+
+        tableCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "character", "class", "class_table", "domain", "equipment", "feat", "item", "monster", "player", "power", "skill", "spell" }));
+
+        jLabel2.setText("Search:");
+
+        jLabel6.setText("table:");
+
+        queryField.setText("query");
+        queryField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                queryFieldActionPerformed(evt);
+            }
+        });
+
+        searchTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Name"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(searchTable);
 
         javax.swing.GroupLayout adminPanelLayout = new javax.swing.GroupLayout(adminPanel);
         adminPanel.setLayout(adminPanelLayout);
@@ -296,8 +340,18 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(jLabel5))
                     .addGroup(adminPanelLayout.createSequentialGroup()
                         .addGap(289, 289, 289)
-                        .addComponent(createPlayer)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(createPlayer))
+                    .addGroup(adminPanelLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(adminPanelLayout.createSequentialGroup()
+                                .addComponent(tableCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(queryField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel6)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(61, 61, 61)
                 .addComponent(playerPane))
         );
         adminPanelLayout.setVerticalGroup(
@@ -307,6 +361,16 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(createPlayer)
                 .addGap(28, 28, 28)
                 .addComponent(jLabel5)
+                .addGap(28, 28, 28)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addGap(7, 7, 7)
+                .addGroup(adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tableCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(queryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(playerPane)
         );
@@ -385,6 +449,11 @@ public class MainWindow extends javax.swing.JFrame {
     private void adminPanelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_adminPanelFocusGained
         getPlayers(this.playerTable);
     }//GEN-LAST:event_adminPanelFocusGained
+
+    private void queryFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_queryFieldActionPerformed
+        this.search(this.queryField.getText(), this.tableCombo.getSelectedItem().toString(), this.searchTable);
+                
+    }//GEN-LAST:event_queryFieldActionPerformed
     
     /**
      * 
@@ -425,6 +494,34 @@ public class MainWindow extends javax.swing.JFrame {
         getChars (pid, charTable);
     }
     
+    public void search(String query, String toTable, JTable table){
+        String sql = "select name from " + toTable + " where name like ?";
+        try{
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, "%" + query + "%");
+            rs = pst.executeQuery();
+            if(rs.next()){       
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                //looping through a ResultSet should be done with a do/while loop
+                //otherwise you miss the first result
+                do {
+                    model.addRow(new String[]{rs.getString("name")});
+                } while(rs.next()); 
+                rs.close();
+                pst.close();
+            }
+        }
+        catch(Exception e)
+        {
+           JOptionPane.showMessageDialog(null, e);
+        } 
+        finally {
+            try{
+                rs.close();
+                pst.close();
+            } catch(Exception e) {}
+        }
+    }
     
     /**
      * populates overall player stats for admin use
@@ -468,9 +565,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu fileMenu;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -479,10 +578,14 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JMenuItem logoutMenu;
     private javax.swing.JComboBox<String> playerNameMenu;
     private javax.swing.JTabbedPane playerPane;
     private javax.swing.JTable playerTable;
+    private javax.swing.JTextField queryField;
+    private javax.swing.JTable searchTable;
     private javax.swing.JTabbedPane tabbedPane;
+    private javax.swing.JComboBox<String> tableCombo;
     // End of variables declaration//GEN-END:variables
 }

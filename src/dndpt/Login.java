@@ -49,7 +49,7 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Login"));
 
-        txt_pword.setText("tester");
+        txt_pword.setText("toor");
         txt_pword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_pwordActionPerformed(evt);
@@ -58,7 +58,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setText("Username: ");
 
-        txt_username.setText("username");
+        txt_username.setText("root");
 
         jLabel2.setText("Password:");
 
