@@ -19,7 +19,7 @@ public class MainWindow extends javax.swing.JFrame {
     int pid;
     
     //for convenience
-    Connection conn;
+    public static Connection conn;
     ResultSet rs = null;
     PreparedStatement pst = null;
     
@@ -37,7 +37,7 @@ public class MainWindow extends javax.swing.JFrame {
         //test to add entries to JTable:
         if (!this.isAdmin)
             this.tabbedPane.setEnabledAt(3, false);
-        this.conn = conn;
+        MainWindow.conn = conn;
         this.getChars(pid);
         
     }

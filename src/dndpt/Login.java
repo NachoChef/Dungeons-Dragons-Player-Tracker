@@ -21,7 +21,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        conn = JavaConn.ConnectDb();
+        conn = JavaConn.ConnectDb("org.sqlite.JDBC", "jdbc:sqlite:dnd35.db");
     }
 
     /**
