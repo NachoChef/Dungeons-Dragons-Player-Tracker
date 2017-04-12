@@ -93,6 +93,8 @@ public class MainWindow extends javax.swing.JFrame {
         setTitle("Dungeons & Dragons Player Tracker");
         setPreferredSize(new java.awt.Dimension(685, 614));
 
+        tabbedPane.setBackground(new java.awt.Color(255, 255, 204));
+        tabbedPane.setOpaque(true);
         tabbedPane.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 tabbedPaneFocusGained(evt);
