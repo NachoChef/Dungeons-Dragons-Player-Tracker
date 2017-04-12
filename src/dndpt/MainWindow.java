@@ -66,7 +66,6 @@ public class MainWindow extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         adminPanel = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
         createPlayer = new javax.swing.JButton();
         playerPane = new javax.swing.JTabbedPane();
         jPanel6 = new javax.swing.JPanel();
@@ -76,10 +75,10 @@ public class MainWindow extends javax.swing.JFrame {
         playerNameMenu = new javax.swing.JComboBox<>();
         tableCombo = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         queryField = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         searchTable = new javax.swing.JTable();
+        getInfo = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
@@ -91,7 +90,9 @@ public class MainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dungeons & Dragons Player Tracker");
-        setPreferredSize(new java.awt.Dimension(685, 614));
+        setPreferredSize(new java.awt.Dimension(763, 659));
+        setResizable(false);
+        setSize(new java.awt.Dimension(763, 659));
 
         tabbedPane.setBackground(new java.awt.Color(255, 255, 204));
         tabbedPane.setOpaque(true);
@@ -199,10 +200,6 @@ public class MainWindow extends javax.swing.JFrame {
         });
         adminPanel.setLayout(null);
 
-        jLabel5.setText("jLabel5");
-        adminPanel.add(jLabel5);
-        jLabel5.setBounds(363, 62, 34, 14);
-
         createPlayer.setText("New Player");
         createPlayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,12 +209,13 @@ public class MainWindow extends javax.swing.JFrame {
         adminPanel.add(createPlayer);
         createPlayer.setBounds(289, 11, 87, 23);
 
-        playerPane.setOpaque(true);
         playerPane.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 playerPaneFocusGained(evt);
             }
         });
+
+        jPanel6.setOpaque(false);
 
         playerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -235,6 +233,7 @@ public class MainWindow extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        playerTable.setOpaque(false);
         jScrollPane2.setViewportView(playerTable);
         if (playerTable.getColumnModel().getColumnCount() > 0) {
             playerTable.getColumnModel().getColumn(0).setMinWidth(20);
@@ -285,15 +284,12 @@ public class MainWindow extends javax.swing.JFrame {
 
         tableCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "character", "class", "class_table", "domain", "equipment", "feat", "item", "monster", "player", "power", "skill", "spell" }));
         adminPanel.add(tableCombo);
-        tableCombo.setBounds(28, 150, 78, 20);
+        tableCombo.setBounds(28, 150, 100, 20);
 
+        jLabel2.setForeground(new java.awt.Color(250, 250, 250));
         jLabel2.setText("Search:");
         adminPanel.add(jLabel2);
-        jLabel2.setBounds(28, 104, 37, 14);
-
-        jLabel6.setText("table:");
-        adminPanel.add(jLabel6);
-        jLabel6.setBounds(28, 129, 28, 14);
+        jLabel2.setBounds(30, 130, 50, 14);
 
         queryField.setText("query");
         queryField.addActionListener(new java.awt.event.ActionListener() {
@@ -302,21 +298,21 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         adminPanel.add(queryField);
-        queryField.setBounds(132, 150, 120, 20);
+        queryField.setBounds(132, 150, 170, 20);
 
         searchTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Name"
+                "Name"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
+                java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false
+                false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -327,11 +323,25 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        searchTable.setColumnSelectionAllowed(true);
         searchTable.setOpaque(false);
         jScrollPane3.setViewportView(searchTable);
+        searchTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (searchTable.getColumnModel().getColumnCount() > 0) {
+            searchTable.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         adminPanel.add(jScrollPane3);
-        jScrollPane3.setBounds(28, 188, 359, 257);
+        jScrollPane3.setBounds(28, 188, 280, 150);
+
+        getInfo.setText("More Info");
+        getInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getInfoActionPerformed(evt);
+            }
+        });
+        adminPanel.add(getInfo);
+        getInfo.setBounds(30, 350, 120, 23);
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/8bee769501b95f549f994ec494187f50.png"))); // NOI18N
         jLabel9.setText("jLabel9");
@@ -385,7 +395,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabbedPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
+            .addComponent(tabbedPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
         );
 
         pack();
@@ -433,6 +443,11 @@ public class MainWindow extends javax.swing.JFrame {
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
         new remote_db();
     }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void getInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getInfoActionPerformed
+        String selection = (String) this.searchTable.getValueAt(this.searchTable.getSelectedRow(), 0);
+        JOptionPane.showMessageDialog(null, selection);
+    }//GEN-LAST:event_getInfoActionPerformed
     
     /**
      * 
@@ -479,8 +494,9 @@ public class MainWindow extends javax.swing.JFrame {
             pst = conn.prepareStatement(sql);
             pst.setString(1, "%" + query + "%");
             rs = pst.executeQuery();
-            if(rs.next()){       
+            if(rs.next()){  
                 DefaultTableModel model = (DefaultTableModel) table.getModel();
+                model.setRowCount(0);
                 //looping through a ResultSet should be done with a do/while loop
                 //otherwise you miss the first result
                 do {
@@ -542,14 +558,13 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitItem;
     private javax.swing.JMenu fileMenu;
+    private javax.swing.JButton getInfo;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
