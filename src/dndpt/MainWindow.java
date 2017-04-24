@@ -73,6 +73,7 @@ public class MainWindow extends javax.swing.JFrame {
         fileMenu = new javax.swing.JMenu();
         logoutMenu = new javax.swing.JMenuItem();
         exitItem = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -279,6 +280,14 @@ public class MainWindow extends javax.swing.JFrame {
         });
         fileMenu.add(exitItem);
 
+        jMenuItem1.setText("Search Character");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jMenuItem1);
+
         jMenuBar1.add(fileMenu);
 
         editMenu.setText("Edit");
@@ -321,6 +330,11 @@ public class MainWindow extends javax.swing.JFrame {
     private void createPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createPlayerActionPerformed
         new New_Player(conn).setVisible(true);
     }//GEN-LAST:event_createPlayerActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        Char_Search.setVisible();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
     
     /**
      * 
@@ -376,6 +390,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
