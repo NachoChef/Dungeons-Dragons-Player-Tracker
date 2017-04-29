@@ -423,14 +423,6 @@ public class MainWindow extends javax.swing.JFrame {
         new New_Player(conn).setVisible(true);
     }//GEN-LAST:event_createPlayerActionPerformed
 
-    private void tabbedPaneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tabbedPaneFocusGained
-        
-    }//GEN-LAST:event_tabbedPaneFocusGained
-
-    private void playerPaneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_playerPaneFocusGained
-        
-    }//GEN-LAST:event_playerPaneFocusGained
-
     private void adminPanelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_adminPanelFocusGained
         getPlayers(this.playerTable);
     }//GEN-LAST:event_adminPanelFocusGained
