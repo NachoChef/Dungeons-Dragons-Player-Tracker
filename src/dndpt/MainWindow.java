@@ -6,11 +6,13 @@ package dndpt;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import java.sql.*;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author Justin
+ * @author Justin Jones
  */
 public class MainWindow extends javax.swing.JFrame {
     //global user identifier fields
@@ -19,7 +21,7 @@ public class MainWindow extends javax.swing.JFrame {
     int pid;
     
     //for convenience
-    Connection conn;
+    public static Connection conn;
     ResultSet rs = null;
     PreparedStatement pst = null;
     
@@ -35,11 +37,9 @@ public class MainWindow extends javax.swing.JFrame {
         this.setVisible(true);
         //disable admin pane if not admin
         //test to add entries to JTable:
-        //DefaultTableModel model = (DefaultTableModel) charTable.getModel();
-        //model.addRow(new String[]{"test", "test"});
         if (!this.isAdmin)
             this.tabbedPane.setEnabledAt(3, false);
-        this.conn = conn;
+        MainWindow.conn = conn;
         this.getChars(pid);
         
     }
@@ -55,35 +55,60 @@ public class MainWindow extends javax.swing.JFrame {
 
         tabbedPane = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         currentPlayerLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         charTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
         adminPanel = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        playerTable = new javax.swing.JTable();
         createPlayer = new javax.swing.JButton();
+        playerPane = new javax.swing.JTabbedPane();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        playerNameMenu = new javax.swing.JComboBox<>();
+        tableCombo = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        queryField = new javax.swing.JTextField();
+        updateButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        searchTable = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         logoutMenu = new javax.swing.JMenuItem();
         exitItem = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
+        remoteItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dungeons & Dragons Player Tracker");
+        setResizable(false);
+        setSize(new java.awt.Dimension(763, 659));
 
-        jLabel3.setText("last session");
+        tabbedPane.setBackground(new java.awt.Color(255, 255, 204));
+        tabbedPane.setOpaque(true);
+        tabbedPane.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tabbedPaneFocusGained(evt);
+            }
+        });
+
+        jPanel1.setRequestFocusEnabled(false);
+        jPanel1.setLayout(null);
 
         jLabel4.setText("random db stats (item count, player/char count, etc)");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(301, 282, 330, 16);
 
         currentPlayerLabel.setText("Active login:");
+        jPanel1.add(currentPlayerLabel);
+        currentPlayerLabel.setBounds(28, 11, 120, 16);
 
         charTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -108,67 +133,35 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        charTable.setCellSelectionEnabled(true);
+        charTable.setOpaque(false);
+        charTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(charTable);
+        charTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (charTable.getColumnModel().getColumnCount() > 0) {
-            charTable.getColumnModel().getColumn(0).setMinWidth(20);
-            charTable.getColumnModel().getColumn(0).setPreferredWidth(20);
+            charTable.getColumnModel().getColumn(0).setMinWidth(22);
+            charTable.getColumnModel().getColumn(0).setPreferredWidth(22);
             charTable.getColumnModel().getColumn(0).setMaxWidth(35);
             charTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        jLabel1.setText("Your characters:");
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(28, 64, 230, 190);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(currentPlayerLabel)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(103, 103, 103)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(273, 273, 273)
-                        .addComponent(jLabel4)))
-                .addContainerGap(131, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(currentPlayerLabel)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(28, 28, 28)
-                .addComponent(jLabel4)
-                .addContainerGap(214, Short.MAX_VALUE))
-        );
+        jLabel1.setText("Your characters:");
+        jLabel1.setMaximumSize(new java.awt.Dimension(110, 16));
+        jLabel1.setMinimumSize(new java.awt.Dimension(110, 16));
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(28, 44, 102, 16);
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/winter_mountain_painting-wallpaper-2560x1600.jpg"))); // NOI18N
+        jLabel7.setText("jLabel7");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(0, -10, 760, 620);
 
         tabbedPane.addTab("Overview", jPanel1);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 762, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 511, Short.MAX_VALUE)
-        );
-
-        tabbedPane.addTab("Quick Build", jPanel3);
+        jPanel2.setLayout(null);
 
         jButton1.setText("Create Character");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -176,53 +169,22 @@ public class MainWindow extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel2.add(jButton1);
+        jButton1.setBounds(10, 11, 148, 29);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addContainerGap(608, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addContainerGap(476, Short.MAX_VALUE))
-        );
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/dungeons-and-dragons-wallpaper-HD5-1.jpg"))); // NOI18N
+        jLabel10.setText("jLabel10");
+        jPanel2.add(jLabel10);
+        jLabel10.setBounds(0, 0, 770, 630);
 
         tabbedPane.addTab("Characters", jPanel2);
 
-        jLabel5.setText("jLabel5");
-
-        playerTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "ID", "Name", "# Characters"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+        adminPanel.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                adminPanelFocusGained(evt);
             }
         });
-        jScrollPane2.setViewportView(playerTable);
-        if (playerTable.getColumnModel().getColumnCount() > 0) {
-            playerTable.getColumnModel().getColumn(0).setMinWidth(20);
-            playerTable.getColumnModel().getColumn(0).setPreferredWidth(20);
-            playerTable.getColumnModel().getColumn(0).setMaxWidth(25);
-        }
+        adminPanel.setLayout(null);
 
         createPlayer.setText("New Player");
         createPlayer.addActionListener(new java.awt.event.ActionListener() {
@@ -230,35 +192,132 @@ public class MainWindow extends javax.swing.JFrame {
                 createPlayerActionPerformed(evt);
             }
         });
+        adminPanel.add(createPlayer);
+        createPlayer.setBounds(289, 11, 112, 29);
 
-        javax.swing.GroupLayout adminPanelLayout = new javax.swing.GroupLayout(adminPanel);
-        adminPanel.setLayout(adminPanelLayout);
-        adminPanelLayout.setHorizontalGroup(
-            adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(adminPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(adminPanelLayout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(jLabel5))
-                    .addGroup(adminPanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(createPlayer)))
-                .addContainerGap(358, Short.MAX_VALUE))
+        playerPane.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                playerPaneFocusGained(evt);
+            }
+        });
+
+        jPanel6.setOpaque(false);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 339, Short.MAX_VALUE)
         );
-        adminPanelLayout.setVerticalGroup(
-            adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(adminPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(adminPanelLayout.createSequentialGroup()
-                        .addComponent(createPlayer)
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel5))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(238, Short.MAX_VALUE))
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 593, Short.MAX_VALUE)
         );
+
+        playerPane.addTab("Players", jPanel6);
+
+        playerNameMenu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(playerNameMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 243, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(playerNameMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 566, Short.MAX_VALUE))
+        );
+
+        playerPane.addTab("Characters", jPanel4);
+
+        adminPanel.add(playerPane);
+        playerPane.setBounds(458, 0, 360, 639);
+
+        tableCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "character", "class", "class_table", "domain", "equipment", "feat", "item", "monster", "player", "power", "skill", "spell" }));
+        adminPanel.add(tableCombo);
+        tableCombo.setBounds(28, 150, 140, 27);
+
+        jLabel2.setForeground(new java.awt.Color(250, 250, 250));
+        jLabel2.setText("Search:");
+        adminPanel.add(jLabel2);
+        jLabel2.setBounds(30, 130, 50, 16);
+
+        queryField.setText("query");
+        queryField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                queryFieldActionPerformed(evt);
+            }
+        });
+        adminPanel.add(queryField);
+        queryField.setBounds(170, 150, 170, 26);
+
+        updateButton.setText("Update Entry");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateButtonActionPerformed(evt);
+            }
+        });
+        adminPanel.add(updateButton);
+        updateButton.setBounds(20, 350, 140, 29);
+
+        deleteButton.setText("Delete Entry");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
+        adminPanel.add(deleteButton);
+        deleteButton.setBounds(160, 350, 140, 29);
+
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        searchTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        searchTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        searchTable.setColumnSelectionAllowed(true);
+        searchTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchTableMouseClicked(evt);
+            }
+        });
+        searchTable.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                searchTableKeyTyped(evt);
+            }
+        });
+        jScrollPane3.setViewportView(searchTable);
+        searchTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (searchTable.getColumnModel().getColumnCount() > 0) {
+            searchTable.getColumnModel().getColumn(0).setResizable(false);
+        }
+
+        adminPanel.add(jScrollPane3);
+        jScrollPane3.setBounds(28, 188, 680, 150);
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/8bee769501b95f549f994ec494187f50.png"))); // NOI18N
+        jLabel9.setText("jLabel9");
+        adminPanel.add(jLabel9);
+        jLabel9.setBounds(0, -60, 910, 730);
 
         tabbedPane.addTab("Admin", adminPanel);
 
@@ -280,18 +339,27 @@ public class MainWindow extends javax.swing.JFrame {
         });
         fileMenu.add(exitItem);
 
-        jMenuItem1.setText("Search Character");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        fileMenu.add(jMenuItem1);
-
         jMenuBar1.add(fileMenu);
 
         editMenu.setText("Edit");
         jMenuBar1.add(editMenu);
+
+        jMenu1.setText("Connect");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
+
+        remoteItem.setText("Remote database");
+        remoteItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                remoteItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(remoteItem);
+
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -299,19 +367,15 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabbedPane)
+            .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabbedPane)
+            .addComponent(tabbedPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Create_Char.setVisible();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void exitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitItemActionPerformed
         System.exit(0);
@@ -327,14 +391,77 @@ public class MainWindow extends javax.swing.JFrame {
         new Login().setVisible(true);
     }//GEN-LAST:event_logoutMenuActionPerformed
 
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void remoteItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remoteItemActionPerformed
+        new remote_db().setVisible(true);
+    }//GEN-LAST:event_remoteItemActionPerformed
+
+    private void tabbedPaneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tabbedPaneFocusGained
+
+    }//GEN-LAST:event_tabbedPaneFocusGained
+
+    private void adminPanelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_adminPanelFocusGained
+
+    }//GEN-LAST:event_adminPanelFocusGained
+
+    private void searchTableKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTableKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchTableKeyTyped
+
+    private void searchTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchTableMouseClicked
+
+    }//GEN-LAST:event_searchTableMouseClicked
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        try{
+            int row = searchTable.getSelectedRow();
+            int col = searchTable.getSelectedColumn();
+            String sql = "DELETE FROM " +tableCombo.getSelectedItem() + " WHERE " +  searchTable.getColumnName(0) + " = " + searchTable.getModel().getValueAt(row,0).toString();
+            DefaultTableModel model = (DefaultTableModel)searchTable.getModel();
+            int modelRow = searchTable.convertRowIndexToModel(row);
+            model.removeRow(modelRow);
+            pst = conn.prepareStatement(sql);
+            pst.executeUpdate();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        try{
+            int row = searchTable.getSelectedRow();
+            int col = searchTable.getSelectedColumn();
+            String newVal = (String)searchTable.getModel().getValueAt(row,col);
+            String sql = "UPDATE " +tableCombo.getSelectedItem() + " SET " + searchTable.getColumnName(col) + " = ? WHERE " +  searchTable.getColumnName(0) + " = " + searchTable.getModel().getValueAt(row,0).toString();
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, newVal);
+            pst.executeUpdate();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+
+        }
+    }//GEN-LAST:event_updateButtonActionPerformed
+
+    private void queryFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_queryFieldActionPerformed
+        this.search(this.queryField.getText(), this.tableCombo.getSelectedItem().toString(), this.searchTable);
+
+    }//GEN-LAST:event_queryFieldActionPerformed
+
+    private void playerPaneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_playerPaneFocusGained
+
+    }//GEN-LAST:event_playerPaneFocusGained
+
     private void createPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createPlayerActionPerformed
         new New_Player(conn).setVisible(true);
     }//GEN-LAST:event_createPlayerActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        Char_Search.setVisible();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Create_Char.setVisible();
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     /**
      * 
@@ -375,29 +502,104 @@ public class MainWindow extends javax.swing.JFrame {
         getChars (pid, charTable);
     }
     
+    public void updateCell (JTable table){
+        
+    }
+    
+    public void search(String query, String toTable, JTable table){
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        String sql = "select * from " + toTable + " where name like ?";
+        try{
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, "%" + query + "%");
+            rs = pst.executeQuery();
+            table.setModel(DbUtils.resultSetToTableModel(rs));
+            TableColumn column;
+            for (int i = 0; i < table.getColumnCount()-1; i++) {
+                column = table.getColumnModel().getColumn(i);
+                if (i == 1)
+                    column.setPreferredWidth(75);
+                else
+                    column.setPreferredWidth(50);
+            } 
+            
+        }
+        catch(Exception e)
+        {
+           JOptionPane.showMessageDialog(null, e);
+        } 
+        finally {
+            try{
+                rs.close();
+                pst.close();
+            } catch(Exception e) {}
+        }
+    }
+    
+    /**
+     * populates overall player stats for admin use
+     * @param table the table to write the data to
+     */
+    public void getPlayers (JTable table) {
+        String sql ="select player.pid, player.name, count(character.cid) from player, character where character.pid = player.pid group by player.pid";
+        try{
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if(rs.next()){       
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                //looping through a ResultSet should be done with a do/while loop
+                //otherwise you miss the first result
+                do {
+                    model.addRow(new String[]{Integer.toString(rs.getInt("cid")), rs.getString("name"), Integer.toString(rs.getInt("count(cid)"))});
+                } while(rs.next()); 
+                rs.close();
+                pst.close();
+            }
+        }
+        catch(Exception e)
+        {
+           JOptionPane.showMessageDialog(null, e);
+        } 
+        finally {
+            try{
+                rs.close();
+                pst.close();
+            } catch(Exception e) {}
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel adminPanel;
     private javax.swing.JTable charTable;
     private javax.swing.JButton createPlayer;
     private javax.swing.JLabel currentPlayerLabel;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JMenuItem logoutMenu;
-    private javax.swing.JTable playerTable;
+    private javax.swing.JComboBox<String> playerNameMenu;
+    private javax.swing.JTabbedPane playerPane;
+    private javax.swing.JTextField queryField;
+    private javax.swing.JMenuItem remoteItem;
+    private javax.swing.JTable searchTable;
     private javax.swing.JTabbedPane tabbedPane;
+    private javax.swing.JComboBox<String> tableCombo;
+    private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -21,7 +21,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        conn = JavaConn.ConnectDb();
+        conn = JavaConn.ConnectDb("org.sqlite.JDBC", "jdbc:sqlite:dnd35.db");
     }
 
     /**
@@ -33,7 +33,6 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         txt_pword = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
@@ -43,17 +42,6 @@ public class Login extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(90, 90, 90));
@@ -61,7 +49,7 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Login"));
 
-        txt_pword.setText("tester");
+        txt_pword.setText("toor");
         txt_pword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_pwordActionPerformed(evt);
@@ -70,7 +58,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setText("Username: ");
 
-        txt_username.setText("username");
+        txt_username.setText("root");
 
         jLabel2.setText("Password:");
 
@@ -224,7 +212,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField txt_pword;
     private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables

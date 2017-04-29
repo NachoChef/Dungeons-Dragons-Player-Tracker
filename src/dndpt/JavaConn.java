@@ -5,21 +5,21 @@ package dndpt;
 
 /**
  *
- * @author Justin
+ * @author Justin jones
  */
 import java.sql.*;
 import javax.swing.*;
 public class JavaConn {
     Connection conn= null;
-    public static Connection ConnectDb(){
- 
-    try{
-    Class.forName("org.sqlite.JDBC");
-    Connection conn = DriverManager.getConnection("jdbc:sqlite:dnd35.db");
-    return conn;
-       }catch (Exception e){
+    public static Connection ConnectDb(String server, String cnctn){
+        try{
+            Class.forName(server);
+            Connection conn = DriverManager.getConnection(cnctn);
+            conn.setAutoCommit(true);
+            return conn;
+        }catch (Exception e){
            JOptionPane.showMessageDialog(null, e);
-       return null;
-       }
+        return null;
+        }
     }
 }
