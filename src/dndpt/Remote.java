@@ -175,6 +175,7 @@ public class Remote extends javax.swing.JFrame {
 
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
         this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void connectBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectBTNActionPerformed

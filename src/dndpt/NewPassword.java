@@ -149,9 +149,9 @@ public class NewPassword extends javax.swing.JFrame {
 
     private void updateplayerpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateplayerpassActionPerformed
         int holder = pid;
-        String currentPass = SHA(currentpass.getText());
-        String newPass = SHA(newpass.getText());
-        String confirmPass = SHA(confirmpass.getText());
+        String currentPass = JavaConn.SHA(currentpass.getText());
+        String newPass = JavaConn.SHA(newpass.getText());
+        String confirmPass = JavaConn.SHA(confirmpass.getText());
 
         try{
             String getinfo = "select * from player";
@@ -170,44 +170,28 @@ public class NewPassword extends javax.swing.JFrame {
                         pst = conn.prepareStatement(sql);
                         pst.execute();
                         JOptionPane.showMessageDialog(null,"Player Password Updated!");
-
                     }
                     else
                     {
-
                         JOptionPane.showMessageDialog(null,"New Passwords Do Not Match!");
-                        //too many messages^^^
                     }
-
                 }
                 else
                 {
                     JOptionPane.showMessageDialog(null,"Current Password Incorrect Or Missing Info");
-
                 }
             }
-
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,e);
         }
+        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_updateplayerpassActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
- public String SHA(String sha) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] array = md.digest(sha.getBytes());
-            StringBuffer sb = new StringBuffer();
-            for (int i = 0; i < array.length; ++i) {
-                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
-            }
-            return sb.toString();
-        } catch (java.security.NoSuchAlgorithmException e) {
-        }
-    return null;
-    }
+
     /**
      * @param args the command line arguments
      */
