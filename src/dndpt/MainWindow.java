@@ -60,7 +60,13 @@ public class MainWindow extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         charTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        charID = new javax.swing.JTextField();
+        newCharName = new javax.swing.JTextField();
+        updateCharName = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
@@ -104,7 +110,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel4.setText("random db stats (item count, player/char count, etc)");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(301, 282, 330, 16);
+        jLabel4.setBounds(301, 282, 300, 16);
 
         currentPlayerLabel.setText("Active login:");
         jPanel1.add(currentPlayerLabel);
@@ -136,6 +142,11 @@ public class MainWindow extends javax.swing.JFrame {
         charTable.setCellSelectionEnabled(true);
         charTable.setOpaque(false);
         charTable.getTableHeader().setReorderingAllowed(false);
+        charTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                charTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(charTable);
         charTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (charTable.getColumnModel().getColumnCount() > 0) {
@@ -152,14 +163,49 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel1.setMaximumSize(new java.awt.Dimension(110, 16));
         jLabel1.setMinimumSize(new java.awt.Dimension(110, 16));
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(28, 44, 102, 16);
+        jLabel1.setBounds(28, 44, 95, 16);
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/winter_mountain_painting-wallpaper-2560x1600.jpg"))); // NOI18N
-        jLabel7.setText("jLabel7");
-        jPanel1.add(jLabel7);
-        jLabel7.setBounds(0, -10, 760, 620);
+        jButton2.setText("Update Player Parameters");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2);
+        jButton2.setBounds(50, 420, 190, 25);
+
+        jLabel3.setText("*click on tuple");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(90, 270, 120, 16);
+
+        charID.setText("jTextField1");
+        jPanel1.add(charID);
+        charID.setBounds(40, 300, 69, 22);
+        charID.setVisible(false);
+
+        newCharName.setText("jTextField1");
+        jPanel1.add(newCharName);
+        newCharName.setBounds(160, 300, 69, 22);
+
+        updateCharName.setText("Update character Name");
+        updateCharName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateCharNameActionPerformed(evt);
+            }
+        });
+        jPanel1.add(updateCharName);
+        updateCharName.setBounds(40, 340, 209, 25);
 
         tabbedPane.addTab("Overview", jPanel1);
+
+        jPanel3.setLayout(null);
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/215073.png"))); // NOI18N
+        jLabel8.setText("jLabel8");
+        jPanel3.add(jLabel8);
+        jLabel8.setBounds(0, 0, 770, 620);
+
+        tabbedPane.addTab("Quick Build", jPanel3);
 
         jPanel2.setLayout(null);
 
@@ -170,7 +216,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButton1);
-        jButton1.setBounds(10, 11, 148, 29);
+        jButton1.setBounds(10, 11, 131, 25);
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/dungeons-and-dragons-wallpaper-HD5-1.jpg"))); // NOI18N
         jLabel10.setText("jLabel10");
@@ -193,7 +239,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         adminPanel.add(createPlayer);
-        createPlayer.setBounds(289, 11, 112, 29);
+        createPlayer.setBounds(289, 11, 97, 25);
 
         playerPane.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -236,11 +282,11 @@ public class MainWindow extends javax.swing.JFrame {
         playerPane.addTab("Characters", jPanel4);
 
         adminPanel.add(playerPane);
-        playerPane.setBounds(458, 0, 360, 639);
+        playerPane.setBounds(458, 0, 344, 623);
 
         tableCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "character", "class", "class_table", "domain", "equipment", "feat", "item", "monster", "player", "power", "skill", "spell" }));
         adminPanel.add(tableCombo);
-        tableCombo.setBounds(28, 150, 140, 27);
+        tableCombo.setBounds(28, 150, 140, 22);
 
         jLabel2.setForeground(new java.awt.Color(250, 250, 250));
         jLabel2.setText("Search:");
@@ -254,7 +300,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         adminPanel.add(queryField);
-        queryField.setBounds(170, 150, 170, 26);
+        queryField.setBounds(170, 150, 170, 22);
 
         updateButton.setText("Update Entry");
         updateButton.addActionListener(new java.awt.event.ActionListener() {
@@ -263,7 +309,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         adminPanel.add(updateButton);
-        updateButton.setBounds(20, 350, 140, 29);
+        updateButton.setBounds(20, 350, 140, 25);
 
         deleteButton.setText("Delete Entry");
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
@@ -272,7 +318,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         adminPanel.add(deleteButton);
-        deleteButton.setBounds(160, 350, 140, 29);
+        deleteButton.setBounds(160, 350, 140, 25);
 
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -377,6 +423,10 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new Create_Char().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void exitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitItemActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitItemActionPerformed
@@ -391,6 +441,27 @@ public class MainWindow extends javax.swing.JFrame {
         new Login().setVisible(true);
     }//GEN-LAST:event_logoutMenuActionPerformed
 
+    private void createPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createPlayerActionPerformed
+        new New_Player(conn).setVisible(true);
+    }//GEN-LAST:event_createPlayerActionPerformed
+
+    private void tabbedPaneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tabbedPaneFocusGained
+        
+    }//GEN-LAST:event_tabbedPaneFocusGained
+
+    private void playerPaneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_playerPaneFocusGained
+        
+    }//GEN-LAST:event_playerPaneFocusGained
+
+    private void adminPanelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_adminPanelFocusGained
+        
+    }//GEN-LAST:event_adminPanelFocusGained
+
+    private void queryFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_queryFieldActionPerformed
+        this.search(this.queryField.getText(), this.tableCombo.getSelectedItem().toString(), this.searchTable);
+                
+    }//GEN-LAST:event_queryFieldActionPerformed
+
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
 
     }//GEN-LAST:event_jMenu1ActionPerformed
@@ -399,21 +470,28 @@ public class MainWindow extends javax.swing.JFrame {
         new remote_db().setVisible(true);
     }//GEN-LAST:event_remoteItemActionPerformed
 
-    private void tabbedPaneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tabbedPaneFocusGained
-
-    }//GEN-LAST:event_tabbedPaneFocusGained
-
-    private void adminPanelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_adminPanelFocusGained
-
-    }//GEN-LAST:event_adminPanelFocusGained
-
     private void searchTableKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTableKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_searchTableKeyTyped
 
     private void searchTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchTableMouseClicked
-
+        
     }//GEN-LAST:event_searchTableMouseClicked
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        try{
+            int row = searchTable.getSelectedRow();
+            int col = searchTable.getSelectedColumn();
+            String newVal = (String)searchTable.getModel().getValueAt(row,col);
+            String sql = "UPDATE " +tableCombo.getSelectedItem() + " SET " + searchTable.getColumnName(col) + " = ? WHERE " +  searchTable.getColumnName(0) + " = " + searchTable.getModel().getValueAt(row,0).toString();
+            pst = conn.prepareStatement(sql);   
+            pst.setString(1, newVal);
+            pst.executeUpdate();
+        }catch(Exception e){
+        JOptionPane.showMessageDialog(null,e);
+        
+        }
+    }//GEN-LAST:event_updateButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         try{
@@ -426,42 +504,57 @@ public class MainWindow extends javax.swing.JFrame {
             pst = conn.prepareStatement(sql);
             pst.executeUpdate();
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
-
+        JOptionPane.showMessageDialog(null,e);
+        
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
-    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+    private void updateCharNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateCharNameActionPerformed
+
         try{
-            int row = searchTable.getSelectedRow();
-            int col = searchTable.getSelectedColumn();
-            String newVal = (String)searchTable.getModel().getValueAt(row,col);
-            String sql = "UPDATE " +tableCombo.getSelectedItem() + " SET " + searchTable.getColumnName(col) + " = ? WHERE " +  searchTable.getColumnName(0) + " = " + searchTable.getModel().getValueAt(row,0).toString();
+            String value1 = newCharName.getText();
+            String value2 = charID.getText();
+
+            String sql ="update character set name = '"+value1+"' where cid = '"+value2+"'";
             pst = conn.prepareStatement(sql);
-            pst.setString(1, newVal);
-            pst.executeUpdate();
+            pst.execute();
+            JOptionPane.showMessageDialog(null,"Character Name Updated!");
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,e);
 
         }
-    }//GEN-LAST:event_updateButtonActionPerformed
+        getChars(pid, charTable);
+        //getChars(pidtemp);
+        //need to update table on screen
+    }//GEN-LAST:event_updateCharNameActionPerformed
 
-    private void queryFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_queryFieldActionPerformed
-        this.search(this.queryField.getText(), this.tableCombo.getSelectedItem().toString(), this.searchTable);
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new update_password(conn,pid).setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-    }//GEN-LAST:event_queryFieldActionPerformed
-
-    private void playerPaneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_playerPaneFocusGained
-
-    }//GEN-LAST:event_playerPaneFocusGained
-
-    private void createPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createPlayerActionPerformed
-        new New_Player(conn).setVisible(true);
-    }//GEN-LAST:event_createPlayerActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Create_Char.setVisible();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void charTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_charTableMouseClicked
+          try{
+            int row = charTable.getSelectedRow();
+            String Table_Click =  (charTable.getModel().getValueAt(row,0).toString());
+            String sql = "select * from character where cid = '"+Table_Click+"'  ";
+            pst = conn.prepareStatement(sql);     
+            rs = pst.executeQuery();
+            if(rs.next()){
+                
+                String add2 = rs.getString("cid");
+                charID.setText(add2);
+                String add1 = rs.getString("name");             
+                newCharName.setText(add1);
+              
+            }
+            
+        }catch(Exception e){
+        JOptionPane.showMessageDialog(null,e);
+        
+        }
+        
+        
+    }//GEN-LAST:event_charTableMouseClicked
     
     /**
      * 
@@ -514,15 +607,6 @@ public class MainWindow extends javax.swing.JFrame {
             pst.setString(1, "%" + query + "%");
             rs = pst.executeQuery();
             table.setModel(DbUtils.resultSetToTableModel(rs));
-            TableColumn column;
-            for (int i = 0; i < table.getColumnCount()-1; i++) {
-                column = table.getColumnModel().getColumn(i);
-                if (i == 1)
-                    column.setPreferredWidth(75);
-                else
-                    column.setPreferredWidth(50);
-            } 
-            
         }
         catch(Exception e)
         {
@@ -570,29 +654,34 @@ public class MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel adminPanel;
+    private javax.swing.JTextField charID;
     private javax.swing.JTable charTable;
     private javax.swing.JButton createPlayer;
-    private javax.swing.JLabel currentPlayerLabel;
+    public javax.swing.JLabel currentPlayerLabel;
     private javax.swing.JButton deleteButton;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JMenuItem logoutMenu;
+    private javax.swing.JTextField newCharName;
     private javax.swing.JComboBox<String> playerNameMenu;
     private javax.swing.JTabbedPane playerPane;
     private javax.swing.JTextField queryField;
@@ -601,5 +690,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tabbedPane;
     private javax.swing.JComboBox<String> tableCombo;
     private javax.swing.JButton updateButton;
+    private javax.swing.JButton updateCharName;
     // End of variables declaration//GEN-END:variables
 }

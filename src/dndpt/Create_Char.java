@@ -27,199 +27,248 @@ public class Create_Char extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        armorClass = new javax.swing.JTextField();
-        initiative = new javax.swing.JTextField();
-        speed = new javax.swing.JTextField();
-        hitDie = new javax.swing.JTextField();
-        hpMax = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
-        str = new javax.swing.JTextField();
-        intell = new javax.swing.JTextField();
-        wis = new javax.swing.JTextField();
-        cha = new javax.swing.JTextField();
-        dex = new javax.swing.JTextField();
-        con = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jPanel3 = new javax.swing.JPanel();
-        charName = new javax.swing.JTextField();
-        playerName = new javax.swing.JTextField();
-        charClass = new javax.swing.JTextField();
-        alignment = new javax.swing.JTextField();
-        race = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
+        SubmitBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        RefreshBtn1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ProfTxt = new javax.swing.JTextArea();
+        HitTxt = new javax.swing.JTextField();
+        NameTxt = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        SkillssTxt = new javax.swing.JTextField();
+        SpellTypeTxt = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        SkillTxt = new javax.swing.JTextArea();
+        jLabel9 = new javax.swing.JLabel();
+        EpicFeatInt = new javax.swing.JTextField();
+        BatTxt = new javax.swing.JTextField();
+        RefLABEL = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        EpicFeatListTxt = new javax.swing.JTextArea();
+        jLabel12 = new javax.swing.JLabel();
+        ClassBox = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        setSize(new java.awt.Dimension(1003, 784));
         getContentPane().setLayout(null);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        SubmitBtn.setText("Submit");
+        getContentPane().add(SubmitBtn);
+        SubmitBtn.setBounds(550, 10, 277, 70);
 
-        armorClass.setText("jTextField4");
+        jLabel1.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jLabel1.setText("D & D Character Creator");
+        jLabel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel1.setOpaque(true);
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(10, 10, 530, 140);
 
-        initiative.setText("jTextField4");
+        RefreshBtn1.setText("Show Info");
+        RefreshBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefreshBtn1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(RefreshBtn1);
+        RefreshBtn1.setBounds(550, 90, 277, 60);
 
-        speed.setText("jTextField4");
+        jLabel2.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel2.setText("Allignment");
+        jLabel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel2.setOpaque(true);
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(10, 190, 160, 20);
 
-        hitDie.setText("jTextField4");
+        jLabel3.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel3.setText("Name");
+        jLabel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel3.setOpaque(true);
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(10, 160, 160, 20);
 
-        hpMax.setText("jTextField4");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(armorClass, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(initiative, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(speed, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(22, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(hpMax, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(hitDie, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(armorClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(initiative, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(speed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(hitDie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(hpMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(242, 323, 270, 99);
-
-        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
-
-        str.setText("jTextField4");
-
-        intell.setText("jTextField4");
-
-        wis.setText("jTextField4");
-
-        cha.setText("jTextField4");
-
-        dex.setText("jTextField4");
-
-        con.setText("jTextField4");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(con, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(intell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(wis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(cha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(str, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(str, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(con, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(intell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(wis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        getContentPane().add(jPanel2);
-        jPanel2.setBounds(51, 272, 79, 172);
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("setsetst");
-        jScrollPane1.setViewportView(jTextArea1);
+        ProfTxt.setBackground(new java.awt.Color(204, 204, 204));
+        ProfTxt.setColumns(20);
+        ProfTxt.setLineWrap(true);
+        ProfTxt.setRows(5);
+        ProfTxt.setWrapStyleWord(true);
+        ProfTxt.setFocusable(false);
+        jScrollPane1.setViewportView(ProfTxt);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(350, 470, 270, 219);
+        jScrollPane1.setBounds(550, 500, 280, 270);
 
-        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
+        HitTxt.setBackground(new java.awt.Color(204, 204, 204));
+        HitTxt.setFocusable(false);
+        HitTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HitTxtActionPerformed(evt);
+            }
+        });
+        getContentPane().add(HitTxt);
+        HitTxt.setBounds(180, 250, 360, 26);
 
-        charName.setText("jTextField4");
+        NameTxt.setText("Character Name");
+        NameTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NameTxtActionPerformed(evt);
+            }
+        });
+        getContentPane().add(NameTxt);
+        NameTxt.setBounds(180, 160, 360, 26);
 
-        playerName.setText("set by login?");
+        jLabel4.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel4.setText("Proficiencies");
+        jLabel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel4.setOpaque(true);
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(550, 470, 280, 20);
 
-        charClass.setText("jTextField4");
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lawful Good", "Neutral Good", "Chaotic Good", "Lawful Neutral", "Neutral", "Chaotic Neutral", "Lawful Evil", "Neutral Evil", "Chaotic Evil" }));
+        getContentPane().add(jComboBox1);
+        jComboBox1.setBounds(180, 190, 360, 27);
 
-        alignment.setText("jTextField4");
+        jLabel5.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel5.setText("Hit Die");
+        jLabel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel5.setOpaque(true);
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(10, 250, 160, 20);
 
-        race.setText("jTextField14");
+        jLabel6.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel6.setText("Skill Points");
+        jLabel6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel6.setOpaque(true);
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(10, 280, 160, 20);
 
-        jTextField13.setText("jTextField4");
+        SkillssTxt.setBackground(new java.awt.Color(204, 204, 204));
+        SkillssTxt.setFocusable(false);
+        SkillssTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SkillssTxtActionPerformed(evt);
+            }
+        });
+        getContentPane().add(SkillssTxt);
+        SkillssTxt.setBounds(180, 280, 360, 26);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(charName, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(charClass, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(race, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(alignment, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(playerName, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(charName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(charClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(playerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(race, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(alignment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
+        SpellTypeTxt.setBackground(new java.awt.Color(204, 204, 204));
+        SpellTypeTxt.setFocusable(false);
+        SpellTypeTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SpellTypeTxtActionPerformed(evt);
+            }
+        });
+        getContentPane().add(SpellTypeTxt);
+        SpellTypeTxt.setBounds(180, 310, 360, 26);
 
-        getContentPane().add(jPanel3);
-        jPanel3.setBounds(41, 11, 471, 72);
+        jLabel7.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel7.setText("Spell Type");
+        jLabel7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel7.setOpaque(true);
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(10, 310, 160, 20);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/dndcharsheet copy.png"))); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 770, 970);
+        jLabel8.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel8.setText("Class Skills");
+        jLabel8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel8.setOpaque(true);
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(550, 160, 280, 20);
+
+        SkillTxt.setBackground(new java.awt.Color(204, 204, 204));
+        SkillTxt.setColumns(20);
+        SkillTxt.setLineWrap(true);
+        SkillTxt.setRows(5);
+        SkillTxt.setWrapStyleWord(true);
+        SkillTxt.setFocusable(false);
+        jScrollPane2.setViewportView(SkillTxt);
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(550, 190, 280, 270);
+
+        jLabel9.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel9.setText("Epic Feat Interval");
+        jLabel9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel9.setOpaque(true);
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(10, 340, 160, 20);
+
+        EpicFeatInt.setBackground(new java.awt.Color(204, 204, 204));
+        EpicFeatInt.setFocusable(false);
+        EpicFeatInt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EpicFeatIntActionPerformed(evt);
+            }
+        });
+        getContentPane().add(EpicFeatInt);
+        EpicFeatInt.setBounds(180, 340, 360, 26);
+
+        BatTxt.setBackground(new java.awt.Color(204, 204, 204));
+        BatTxt.setFocusable(false);
+        BatTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BatTxtActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BatTxt);
+        BatTxt.setBounds(180, 370, 360, 26);
+
+        RefLABEL.setBackground(new java.awt.Color(153, 153, 153));
+        RefLABEL.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        RefLABEL.setText("Reference");
+        RefLABEL.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        RefLABEL.setOpaque(true);
+        getContentPane().add(RefLABEL);
+        RefLABEL.setBounds(10, 370, 160, 20);
+
+        jLabel11.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel11.setText("Epic Feat List");
+        jLabel11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel11.setOpaque(true);
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(260, 470, 280, 20);
+
+        EpicFeatListTxt.setBackground(new java.awt.Color(204, 204, 204));
+        EpicFeatListTxt.setColumns(20);
+        EpicFeatListTxt.setLineWrap(true);
+        EpicFeatListTxt.setRows(5);
+        EpicFeatListTxt.setWrapStyleWord(true);
+        EpicFeatListTxt.setFocusable(false);
+        jScrollPane3.setViewportView(EpicFeatListTxt);
+
+        getContentPane().add(jScrollPane3);
+        jScrollPane3.setBounds(260, 500, 280, 270);
+
+        jLabel12.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel12.setText("Class");
+        jLabel12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel12.setOpaque(true);
+        getContentPane().add(jLabel12);
+        jLabel12.setBounds(10, 220, 160, 20);
+
+        ClassBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Wizard" }));
+        getContentPane().add(ClassBox);
+        ClassBox.setBounds(180, 220, 360, 27);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -231,6 +280,379 @@ public class Create_Char extends javax.swing.JFrame {
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void HitTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HitTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HitTxtActionPerformed
+
+    private void NameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NameTxtActionPerformed
+
+    private void SkillssTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SkillssTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SkillssTxtActionPerformed
+
+    private void SpellTypeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SpellTypeTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SpellTypeTxtActionPerformed
+
+    private void EpicFeatIntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EpicFeatIntActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EpicFeatIntActionPerformed
+
+    private void BatTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BatTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BatTxtActionPerformed
+
+    private void RefreshBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshBtn1ActionPerformed
+        String itemText = (String)ClassBox.getSelectedItem( );
+        if (itemText == "Barbarian")
+        {
+            
+            HitTxt.setText("d12");
+            SkillTxt.setText("Climb, Craft, Handle Animal, Intimidate, Jump, Listen, Ride, Survival, Swim");
+            SkillssTxt.setText("4");
+            
+            SpellTypeTxt.setText("None");
+            
+            EpicFeatListTxt.setText("Armor Skin, Chaotic Rage, Damage Reduction, "
+                    + "Devastating Critical, Dire Charge, Epic Endurance, Epic Prowess, "
+                    + "Epic Speed, Epic Toughness, Epic Weapon Focus, Fast Healing, Incite Rage, "
+                    + "Legendary Climber, Legendary Leaper, Legendary Rider, Legendary Tracker,"
+                    + " Legendary Wrestler, Mighty Rage, Overwhelming Critical, Ruinous Rage, "
+                    + "Terrifying Rage, Thundering Rage");
+            EpicFeatInt.setText("4");
+            
+            
+            BatTxt.setText("SRD 3.5 ClassesI");
+            
+            
+            ProfTxt.setText("A barbarian is proficient with all simple and martial weapons, "
+                    + "light armor, medium armor, and shields (except tower shields).");
+
+        }
+        else if (itemText == "Bard")
+        {
+            
+            HitTxt.setText("d6");
+            SkillTxt.setText ("Appraise, Balance, Bluff, Climb, Concentration, Craft, "
+                    + "Decipher Script, Diplomacy, Disguise, Escape Artist, Gather Information, "
+                    + "Hide, Jump, Knowledge (all skills, taken individually), Listen, "
+                    + "Move Silently, Perform, Profession, Sense Motive, Sleight of Hand, "
+                    + "Speak Language (n/a), Spellcraft, Swim, Tumble, Use Magic Device");
+            SkillssTxt.setText ("6");
+            
+            SpellTypeTxt.setText("Arcane");
+            
+            EpicFeatListTxt.setText(" Augmented Alchemy, Deafening Song, Epic Inspiration, "
+                    + "Epic Leadership, Epic Reputation, Epic Skill Focus, Group Inspiration, "
+                    + "Hindering Song, Improved Combat Casting, Improved Metamagic, Improved Spell Capacity, "
+                    + "Inspire Excellence, Lasting Inspiration, Master Staff, Master Wand, "
+                    + "Music of the Gods, Permanent Emanation, Polyglot, Ranged Inspiration, "
+                    + "Rapid Inspiration, Reactive Countersong, Spell Knowledge, Spell Stowaway, "
+                    + "Spell Opportunity, Tenacious Magic");
+            EpicFeatInt.setText("3");
+            
+            
+            BatTxt.setText("SRD 3.5 ClassesI");
+            
+            
+            ProfTxt.setText("A bard is proficient with all simple weapons, plus the longsword, "
+                    + "rapier, sap, short sword, shortbow, and whip. Bards are proficient with"
+                    + " light armor and shields (except tower shields). A bard can cast bard "
+                    + "spells while wearing light armor without incurring the normal arcane "
+                    + "spell failure chance. However, like any other arcane spellcaster, a bard "
+                    + "wearing medium or heavy armor or using a shield incurs a chance of arcane "
+                    + "spell failure if the spell in question has a somatic component (most do). "
+                    + "A multiclass bard still incurs the normal arcane spell failure chance for "
+                    + "arcane spells received from other classes.");
+
+        }
+        else if (itemText == "Cleric")
+        {
+            
+            HitTxt.setText("d8");
+            SkillTxt.setText ("Concentration, Craft, Diplomacy, Heal, "
+                    + "Knowledge (arcana), Knowledge (history), Knowledge (religion), "
+                    + "Knowledge (the planes), Profession, Spellcraft");
+            SkillssTxt.setText("2");
+            
+            SpellTypeTxt.setText("Divine");
+            
+            EpicFeatListTxt.setText("Armor Skin, Automatic Quicken Spell, Automatic Silent Spell, "
+                    + "Automatic Still Spell, Bonus Domain, Enhance Spell, Epic Spell Focus, "
+                    + "Epic Spell Penetration, Epic Spellcasting, Ignore Material Components, "
+                    + "Improved Alignment-Based Casting, Improved Combat Casting, Improved Heighten Spell, "
+                    + "Improved Metamagic, Improved Spell Capacity, Intensify Spell, Multispell, "
+                    + "Negative Energy Burst, Permanent Emanation, Planar Turning, Positive Energy Aura, "
+                    + "Spectral Strike, Spell Stowaway, Spell Opportunity, Spontaneous Domain Access, "
+                    + "Spontaneous Spell, Tenacious Magic, Undead Mastery, Zone of Animation");
+            EpicFeatInt.setText("3");
+            
+            
+            BatTxt.setText("SRD 3.5 ClassesI");
+            
+            ProfTxt.setText("Clerics are proficient with all simple weapons, with all types of armor "
+                    + "(light, medium, and heavy), and with shields (except tower shields)."
+                    + "A cleric who chooses the War domain receives the Weapon Focus feat related "
+                    + "to his deity's weapon as a bonus feat. He also receives the appropriate "
+                    + "Martial Weapon Proficiency feat as a bonus feat, if the weapon falls into that category.");
+ 
+        }
+        else if (itemText == "Druid")
+        {
+            
+            HitTxt.setText("d8");
+            SkillTxt.setText ("Concentration, Craft, Diplomacy, "
+                    + "Handle Animal, Heal, Knowledge (nature), "
+                    + "Listen, Profession, Ride, Spellcraft, Spot, "
+                    + "Survival, Swim");
+            SkillssTxt.setText("4");
+            
+            SpellTypeTxt.setText("Divine");
+            
+            EpicFeatListTxt.setText("Automatic Quicken Spell, Automatic Silent Spell, "
+                    + "Automatic Still Spell, Colossal Wild Shape, Diminutive Wild Shape, "
+                    + "Dragon Wild Shape, Energy Resistance, Enhance Spell, Epic Spell Focus, "
+                    + "Epic Spell Penetration, Epic Spellcasting, Fast Healing, Fine Wild Shape, "
+                    + "Gargantuan Wild Shape, Ignore Material Components, Improved Combat Casting,"
+                    + " Improved Elemental Wild Shape, Improved Heighten Spell, Improved Metamagic, "
+                    + "Improved Spell Capacity, Intensify Spell, Magical Beast Companion, "
+                    + "Magical Beast Wild Shape, Multispell, Perfect Health, Permanent Emanation,"
+                    + " Plant Wild Shape, Spell Stowaway, Spell Opportunity, Spontaneous Spell, "
+                    + "Tenacious Magic, Vermin Wild Shape");
+            EpicFeatInt.setText("4");
+            
+            
+            BatTxt.setText("SRD 3.5 ClassesI");
+            
+            ProfTxt.setText("Druids are proficient with the following weapons: club, "
+                    + "dagger, dart, quarterstaff, scimitar, sickle, shortspear, sling, "
+                    + "and spear. They are also proficient with all natural attacks "
+                    + "(claw, bite, and so forth) of any form they assume with wild shape "
+                    + "(see below).Druids are proficient with light and medium armor but are "
+                    + "prohibited from wearing metal armor; thus, they may wear only padded, "
+                    + "leather, or hide armor. (A druid may also wear wooden armor that has "
+                    + "been altered by the ironwood spell so that it functions as though it "
+                    + "were steel. See the ironwood spell description) Druids are proficient "
+                    + "with shields (except tower shields) but must use only wooden ones.A druid "
+                    + "who wears prohibited armor or carries a prohibited shield is unable to "
+                    + "cast druid spells or use any of her supernatural or spell-like class "
+                    + "abilities while doing so and for 24 hours thereafter.");
+
+        }
+        else if (itemText == "Fighter")
+        {
+            
+            HitTxt.setText("d10");
+            SkillTxt.setText ("Climb, Craft, Handle Animal, Intimidate, Jump, Ride, Swim");
+            SkillssTxt.setText("2");
+            
+            SpellTypeTxt.setText("None");
+            
+            EpicFeatListTxt.setText("Armor Skin, Combat Archery, Damage Reduction, "
+                    + "Devastating Critical, Dire Charge, Distant Shot, Energy Resistance,"
+                    + " Epic Endurance, Epic Leadership, Epic Prowess, Epic Toughness, "
+                    + "Epic Weapon Focus, Epic Weapon Specialization, Exceptional Deflection,"
+                    + " Improved Combat Reflexes, Improved Manyshot, Improved Stunning Fist, "
+                    + "Improved Whirlwind Attack, Infinite Deflection, Instant Reload, "
+                    + "Legendary Commander, Legendary Rider, Legendary Wrestler, Overwhelming Critical, "
+                    + "Penetrate Damage Reduction, Perfect Two-Weapon Fighting, Reflect Arrows, "
+                    + "Spellcasting Harrier, Storm of Throws, Superior Initiative, Swarm of Arrows, "
+                    + "Two-Weapon Rend, Uncanny Accuracy. In addition to the feats on this list, "
+                    + "the fighter may treat any feat designated as a fighter bonus feat, "
+                    + "but not listed here, as being on his or her bonus feat list");
+            EpicFeatInt.setText("2");
+            
+            
+            BatTxt.setText("SRD 3.5 ClassesI");
+            
+            ProfTxt.setText("A fighter is proficient with all simple and martial weapons "
+                    + "and with all armor (heavy, medium, and light) and shields (including "
+                    + "tower shields).");
+
+        }
+        else if (itemText == "Monk")
+        {
+            
+            HitTxt.setText("d8");
+            SkillTxt.setText ("Balance, Climb, Concentration, Craft, Diplomacy, "
+                    + "Escape Artist, Hide, Jump, Knowledge (arcana), Knowledge (religion), "
+                    + "Listen, Move Silently, Perform, Profession, Sense Motive, Spot, Swim, Tumble");
+            SkillssTxt.setText("4");
+            
+            SpellTypeTxt.setText("None");
+            
+            EpicFeatListTxt.setText("Armor Skin, Blinding Speed, Damage Reduction, "
+                    + "Energy Resistance, Epic Prowess, Epic Speed, Epic Toughness,"
+                    + " Exceptional Deflection, Fast Healing, Improved Combat Reflexes, "
+                    + "Improved ki Strike, Improved Spell Resistance, Improved Stunning Fist, "
+                    + "Infinite Deflection, Keen Strike, Legendary Climber, Legendary Wrestler, "
+                    + "Reflect Arrows, Righteous Strike, Self-Concealment, Shattering Strike,"
+                    + " Vorpal Strike");
+            EpicFeatInt.setText("5");
+            
+            
+            BatTxt.setText("SRD 3.5 ClassesI");
+            
+            ProfTxt.setText("Monks are proficient with club, crossbow (light or heavy), "
+                    + "dagger, handaxe, javelin, kama, nunchaku, quarterstaff, sai, shuriken, "
+                    + "siangham, and sling.Monks are not proficient with any armor or shields"
+                    + " When wearing armor, using a shield, or carrying a medium or heavy load, "
+                    + "a monk loses her AC bonus, as well as her fast movement and flurry of blows abilities.");
+ 
+        }
+        else if (itemText == "Paladin")
+        {
+            
+            HitTxt.setText("d10");
+            SkillTxt.setText ("Concentration, Craft, Diplomacy, Handle Animal, "
+                    + "Heal, Knowledge (nobility and royalty), Knowledge (religion), "
+                    + "Profession, Ride, Sense Motive");
+            SkillssTxt.setText("2");
+            
+            SpellTypeTxt.setText("Divine");
+            
+            EpicFeatListTxt.setText("Armor Skin, Devastating Critical, Epic Leadership, "
+                    + "Epic Prowess, Epic Reputation, Epic Toughness, Epic Weapon Focus, "
+                    + "Great Smiting, Holy Strike, Improved Aura of Courage, "
+                    + "Improved Combat Casting, Improved Spell Capacity, Legendary Commander,"
+                    + " Legendary Rider, Overwhelming Critical, Perfect Health,"
+                    + " Permanent Emanation, Planar Turning, Positive Energy Aura, "
+                    + "Spectral Strike, Spontaneous Spell, Widen Aura of Courage");
+            EpicFeatInt.setText("3");
+            
+           
+            BatTxt.setText("SRD 3.5 ClassesI");
+            
+            ProfTxt.setText("Paladins are proficient with all simple and martial weapons, "
+                    + "with all types of armor (heavy, medium, and light), and with "
+                    + "shields (except tower shields).");
+
+        }
+        else if (itemText == "Ranger")
+        {
+            
+            HitTxt.setText("d8");
+            SkillTxt.setText ("Climb, Concentration, Craft, Handle Animal, Heal, Hide, "
+                    + "Jump, Knowledge (dungeoneering), Knowledge (geography), Knowledge (nature), "
+                    + "Listen, Move Silently, Profession, Ride, Search, Spot, Survival, Swim, Use Rope");
+            SkillssTxt.setText("6");
+            
+            SpellTypeTxt.setText("Divine");
+            
+            EpicFeatListTxt.setText("Bane of Enemies, Blinding Speed, Combat Archery,"
+                    + " Death of Enemies, Distant Shot, Epic Endurance, Epic Prowess, "
+                    + "Epic Speed, Epic Toughness, Epic Weapon Focus, Fast Healing,"
+                    + " Improved Combat Casting, Improved Favored Enemy, Improved Manyshot,"
+                    + " Improved Spell Capacity, Legendary Climber, Legendary Rider, "
+                    + "Legendary Tracker, Perfect Health, Perfect Two-Weapon Fighting, "
+                    + "Permanent Emanation, Spontaneous Spell, Storm of Throws, Swarm of Arrows, "
+                    + "Two-Weapon Rend, Uncanny Accuracy");
+            EpicFeatInt.setText("3");
+            
+            
+            BatTxt.setText("SRD 3.5 ClassesI");
+            
+            ProfTxt.setText("A ranger is proficient with all simple "
+                    + "and martial weapons, and with light armor and shields "
+                    + "(except tower shields).");
+ 
+        }
+        else if (itemText == "Rogue")
+        {
+            
+            HitTxt.setText("d6");
+            SkillTxt.setText ("Appraise, Balance, Bluff, Climb, Craft, "
+                    + "Decipher Script, Diplomacy, Disable Device, Disguise, "
+                    + "Escape Artist, Forgery, Gather Information, Hide, Intimidate, "
+                    + "Jump, Knowledge (local), Listen, Move Silently, Open Lock, "
+                    + "Perform, Profession, Search, Sense Motive, Sleight of Hand, "
+                    + "Spot, Swim, Tumble, Use Magic Device, Use Rope");
+            SkillssTxt.setText("8");
+            
+            SpellTypeTxt.setText("None");
+            
+            EpicFeatListTxt.setText("Blinding Speed, Combat Archery, Dexterous Fortitude,"
+                    + " Dexterous Will, Epic Dodge, Epic Reputation, Epic Skill Focus, Epic Speed, "
+                    + "Improved Combat Reflexes, Improved Sneak Attack, Legendary Climber, "
+                    + "Lingering Damage, Self-Concealment, Sneak Attack of Opportunity, "
+                    + "Spellcasting Harrier, Superior Initiative, Trap Sense, Uncanny Accuracy. "
+                    + "The rogue may choose a special rogue ability instead of a bonus feat");
+            EpicFeatInt.setText("4");
+            
+            
+            BatTxt.setText("SRD 3.5 ClassesI");
+            
+            ProfTxt.setText("Rogues are proficient with all simple weapons, plus "
+                    + "the hand crossbow, rapier, sap, shortbow, and short sword. "
+                    + "Rogues are proficient with light armor, but not with shields.");
+
+        }
+        else if (itemText == "Sorcerer")
+        {
+            
+            HitTxt.setText("d4");
+            SkillTxt.setText ("Bluff, Concentration, Craft, "
+                    + "Knowledge (arcana), Profession, Spellcraft");
+            SkillssTxt.setText("2");
+            
+            SpellTypeTxt.setText("Arcane");
+            
+            EpicFeatListTxt.setText(" Augmented Alchemy, Automatic Quicken Spell, Automatic Silent Spell,"
+                    + " Automatic Still Spell, Energy Resistance, Enhance Spell, Epic Spell Focus,"
+                    + " Epic Spell Penetration, Epic Spellcasting, Familiar Spell, Ignore Material Components, "
+                    + "Improved Combat Casting, Improved Heighten Spell, Improved Metamagic, "
+                    + "Improved Spell Capacity, Intensify Spell, Master Staff, Master Wand, Multispell, "
+                    + "Permanent Emanation, Spell Knowledge, Spell Stowaway, Spell Opportunity");
+            EpicFeatInt.setText("3");
+            
+            
+            
+            BatTxt.setText("SRD 3.5 ClassesI");
+            
+            ProfTxt.setText("Sorcerers are proficient with all simple weapons. "
+                    + "They are not proficient with any type of armor or shield. "
+                    + "Armor of any type interferes with a sorcerer's gestures, "
+                    + "which can cause his spells with somatic components to fail.");
+         
+        }
+        else if (itemText == "Wizard")
+        {
+            
+            HitTxt.setText("d4");
+            SkillTxt.setText ("Concentration, Craft, Decipher Script, "
+                    + "Knowledge (all skills, taken individually), Profession, "
+                    + "Spellcraft");
+            SkillssTxt.setText("2");
+            
+            SpellTypeTxt.setText("Arcane");
+            
+            EpicFeatListTxt.setText(" Augmented Alchemy, Automatic Quicken Spell, Automatic Silent Spell, "
+                    + "Automatic Still Spell, Combat Casting, Craft Epic Magic Arms and Armor, Craft Epic Rod, "
+                    + "Craft Epic Staff, Craft Epic Wondrous Item, Efficient Item Creation, Enhance Spell, "
+                    + "Epic Spell Focus, Epic Spell Penetration, Epic Spellcasting, Familiar Spell, "
+                    + "Forge Epic Ring, Ignore Material Components, Improved Combat Casting, "
+                    + "Improved Heighten Spell, Improved Metamagic, Improved Spell Capacity, "
+                    + "Intensify Spell, Multispell, Permanent Emanation, Scribe Epic Scroll, "
+                    + "Spell Focus, Spell Knowledge, Spell Mastery, Spell Penetration Spell Stowaway, "
+                    + "Spell Opportunity, Spontaneous Spell, Tenacious Magic. In addition to the feats "
+                    + "on this list, the wizard may select any item creation feat or metamagic feat not listed here");
+            EpicFeatInt.setText("3");
+            
+            
+            
+            BatTxt.setText("SRD 3.5 ClassesI");
+            
+            ProfTxt.setText("Wizards are proficient with the club, dagger, heavy crossbow, "
+                    + "light crossbow, and quarterstaff, but not with any type of armor or shield. "
+                    + "Armor of any type interferes with a wizard's movements, which can "
+                    + "cause his or her spells with somatic components to fail.");
+
+        }
+        
+    }//GEN-LAST:event_RefreshBtn1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,28 +695,33 @@ public class Create_Char extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField alignment;
-    private javax.swing.JTextField armorClass;
-    private javax.swing.JTextField cha;
-    private javax.swing.JTextField charClass;
-    private javax.swing.JTextField charName;
-    private javax.swing.JTextField con;
-    private javax.swing.JTextField dex;
-    private javax.swing.JTextField hitDie;
-    private javax.swing.JTextField hpMax;
-    private javax.swing.JTextField initiative;
-    private javax.swing.JTextField intell;
+    private javax.swing.JTextField BatTxt;
+    private javax.swing.JComboBox<String> ClassBox;
+    private javax.swing.JTextField EpicFeatInt;
+    private javax.swing.JTextArea EpicFeatListTxt;
+    private javax.swing.JTextField HitTxt;
+    private javax.swing.JTextField NameTxt;
+    private javax.swing.JTextArea ProfTxt;
+    private javax.swing.JLabel RefLABEL;
+    private javax.swing.JButton RefreshBtn1;
+    private javax.swing.JTextArea SkillTxt;
+    private javax.swing.JTextField SkillssTxt;
+    private javax.swing.JTextField SpellTypeTxt;
+    private javax.swing.JButton SubmitBtn;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField playerName;
-    private javax.swing.JTextField race;
-    private javax.swing.JTextField speed;
-    private javax.swing.JTextField str;
-    private javax.swing.JTextField wis;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 }
