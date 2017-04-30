@@ -40,12 +40,11 @@ public class MainWindow extends javax.swing.JFrame {
         //disable admin pane if not admin
         //test to add entries to JTable:
         if (!this.isAdmin)
-            this.tabbedPane.setEnabledAt(3, false);
+            this.tabbedPane.setEnabledAt(1, false);
         this.conn = conn;
         this.getChars(pid, charTable);
-
+        hat.setVisible(false);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,11 +62,13 @@ public class MainWindow extends javax.swing.JFrame {
         pcount = new javax.swing.JLabel();
         ccount = new javax.swing.JLabel();
         icount = new javax.swing.JLabel();
+        hat = new javax.swing.JLabel();
         img = new javax.swing.JLabel();
         deleteButton1 = new javax.swing.JButton();
         updateButton1 = new javax.swing.JButton();
         panething = new javax.swing.JScrollPane();
         charTable = new javax.swing.JTable();
+        burrisbutton = new javax.swing.JButton();
         bg = new javax.swing.JLabel();
         adminPanel = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -149,6 +150,10 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel1.add(icount);
         icount.setBounds(350, 390, 130, 16);
 
+        hat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/hat.png"))); // NOI18N
+        jPanel1.add(hat);
+        hat.setBounds(80, 200, 180, 230);
+
         img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/drizzt.png"))); // NOI18N
         jPanel1.add(img);
         img.setBounds(-20, 280, 520, 390);
@@ -186,6 +191,15 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPanel1.add(panething);
         panething.setBounds(0, 50, 610, 150);
+
+        burrisbutton.setBackground(new java.awt.Color(0, 0, 0));
+        burrisbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                burrisbuttonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(burrisbutton);
+        burrisbutton.setBounds(597, 579, 10, 10);
 
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/winter_mountain_painting-wallpaper-2560x1600.jpg"))); // NOI18N
         bg.setText("jLabel3");
@@ -534,6 +548,10 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_updateButton1ActionPerformed
 
+    private void burrisbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_burrisbuttonActionPerformed
+        hat.setVisible(true);
+    }//GEN-LAST:event_burrisbuttonActionPerformed
+
     private void tabbedPaneFocusGained(java.awt.event.FocusEvent evt) {
         String sql = "SELECT pid, name, username, isAdmin FROM player";
         try{
@@ -582,22 +600,7 @@ public class MainWindow extends javax.swing.JFrame {
      * @param table the name of the table we will write the results to
      */
     public void getChars (int pid, JTable table) {
-        /*
-        String sql ="select * from character where character.pid = ?";
-        try{
-            pst = conn.prepareStatement(sql);
-            pst.setString(1, Integer.toString(pid));
-            rs = pst.executeQuery();
-            table.setModel(DbUtils.resultSetToTableModel(rs));
-        }catch(Exception e){
-                JOptionPane.showMessageDialog(this, e.getMessage());
-        } 
-        finally {
-            try{
-                rs.close();
-                pst.close();
-            } catch(Exception e) {}
-        }*/
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         String sql = "SELECT * FROM character where character.pid = ?";
         try{
             pst = conn.prepareStatement(sql);
@@ -612,6 +615,7 @@ public class MainWindow extends javax.swing.JFrame {
                 pst.close();
             } catch(Exception e) {}
         }
+        
     }
 
     public void search(String query, String toTable, JTable table){
@@ -673,6 +677,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel adminPanel;
     private javax.swing.JLabel bg;
     private javax.swing.JLabel bg2;
+    private javax.swing.JButton burrisbutton;
     private javax.swing.JLabel ccount;
     private javax.swing.JTable charTable;
     private javax.swing.JButton createPlayer;
@@ -682,6 +687,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitItem;
     private javax.swing.JMenu fileMenu;
+    private javax.swing.JLabel hat;
     private javax.swing.JLabel icount;
     private javax.swing.JLabel img;
     private javax.swing.JButton jButton1;

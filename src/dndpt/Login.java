@@ -168,7 +168,7 @@ public class Login extends javax.swing.JFrame {
             if(rs.next()){
                 //if entry exists, we need pid and permissions to give to mainWindow
                 //to set permissions
-                sql = "select * from player where username =?";
+                sql = "select * from player where username = ?";
                 pst = conn.prepareStatement(sql);
                 pst.setString(1, txt_username.getText());
                 rs = pst.executeQuery();
@@ -181,11 +181,12 @@ public class Login extends javax.swing.JFrame {
                 pst.close();
             } else {
                 JOptionPane.showMessageDialog(null, "Unable to login.");
+                
             }
         }
         catch(Exception e)
         {
-           JOptionPane.showMessageDialog(null, e);
+           JOptionPane.showMessageDialog(null, e.getMessage());
         } 
         finally {
             try{
