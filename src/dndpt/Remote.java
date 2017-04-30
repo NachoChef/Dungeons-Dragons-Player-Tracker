@@ -9,12 +9,12 @@ package dndpt;
  *
  * @author Justin
  */
-public class remote_db extends javax.swing.JFrame {
+public class Remote extends javax.swing.JFrame {
 
     /**
      * Creates new form remote_db
      */
-    public remote_db() {
+    public Remote() {
         initComponents();
     }
 
@@ -45,7 +45,7 @@ public class remote_db extends javax.swing.JFrame {
 
         jLabel2.setText("jLabel2");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(204, 255, 204));
         setMinimumSize(new java.awt.Dimension(410, 340));
         setResizable(false);
