@@ -42,7 +42,7 @@ public class MainWindow extends javax.swing.JFrame {
         if (!this.isAdmin)
             this.tabbedPane.setEnabledAt(3, false);
         this.conn = conn;
-        this.getChars(pid);
+        this.getChars(pid, charTable);
 
     }
 
@@ -66,8 +66,8 @@ public class MainWindow extends javax.swing.JFrame {
         img = new javax.swing.JLabel();
         deleteButton1 = new javax.swing.JButton();
         updateButton1 = new javax.swing.JButton();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        charSearchTable = new javax.swing.JTable();
+        panething = new javax.swing.JScrollPane();
+        charTable = new javax.swing.JTable();
         bg = new javax.swing.JLabel();
         adminPanel = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -171,33 +171,21 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel1.add(updateButton1);
         updateButton1.setBounds(0, 200, 140, 29);
 
-        jScrollPane5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        jScrollPane5.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-        charSearchTable.setModel(new javax.swing.table.DefaultTableModel(
+        charTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        charSearchTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        charSearchTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                charSearchTableMouseClicked(evt);
-            }
-        });
-        charSearchTable.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                charSearchTableKeyTyped(evt);
-            }
-        });
-        jScrollPane5.setViewportView(charSearchTable);
-        charSearchTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        panething.setViewportView(charTable);
 
-        jPanel1.add(jScrollPane5);
-        jScrollPane5.setBounds(0, 50, 610, 150);
+        jPanel1.add(panething);
+        panething.setBounds(0, 50, 610, 150);
 
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/winter_mountain_painting-wallpaper-2560x1600.jpg"))); // NOI18N
         bg.setText("jLabel3");
@@ -253,7 +241,10 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
+                .addGap(14, 14, 14))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -526,10 +517,10 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void updateButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButton1ActionPerformed
         try{
-            int row = charSearchTable.getSelectedRow();
-            int col = charSearchTable.getSelectedColumn();
-            String newVal = (String)charSearchTable.getModel().getValueAt(row,col);
-            String sql = "UPDATE character SET " + charSearchTable.getColumnName(col) + " = ? WHERE " +  charSearchTable.getColumnName(0) + " = " + charSearchTable.getModel().getValueAt(row,0).toString();
+            int row = charTable.getSelectedRow();
+            int col = charTable.getSelectedColumn();
+            String newVal = (String)charTable.getModel().getValueAt(row,col);
+            String sql = "UPDATE character SET " + charTable.getColumnName(col) + " = ? WHERE " +  charTable.getColumnName(0) + " = " + charTable.getModel().getValueAt(row,0).toString();
             pst = conn.prepareStatement(sql);
             pst.setString(1, newVal);
             pst.executeUpdate();
@@ -542,14 +533,6 @@ public class MainWindow extends javax.swing.JFrame {
             } catch(Exception e) {}
         }
     }//GEN-LAST:event_updateButton1ActionPerformed
-
-    private void charSearchTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_charSearchTableMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_charSearchTableMouseClicked
-
-    private void charSearchTableKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_charSearchTableKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_charSearchTableKeyTyped
 
     private void tabbedPaneFocusGained(java.awt.event.FocusEvent evt) {
         String sql = "SELECT pid, name, username, isAdmin FROM player";
@@ -599,7 +582,8 @@ public class MainWindow extends javax.swing.JFrame {
      * @param table the name of the table we will write the results to
      */
     public void getChars (int pid, JTable table) {
-        String sql ="select id, name from character where character.pid = ?";
+        /*
+        String sql ="select * from character where character.pid = ?";
         try{
             pst = conn.prepareStatement(sql);
             pst.setString(1, Integer.toString(pid));
@@ -613,12 +597,21 @@ public class MainWindow extends javax.swing.JFrame {
                 rs.close();
                 pst.close();
             } catch(Exception e) {}
+        }*/
+        String sql = "SELECT * FROM character where character.pid = ?";
+        try{
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, Integer.toString(pid));
+            rs = pst.executeQuery();
+            charTable.setModel(DbUtils.resultSetToTableModel(rs));
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }finally {
+            try{
+                rs.close();
+                pst.close();
+            } catch(Exception e) {}
         }
-    }
-
-    //overload for default charTable
-    public void getChars (int pid){
-        getChars (pid, charSearchTable);
     }
 
     public void search(String query, String toTable, JTable table){
@@ -681,7 +674,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel bg;
     private javax.swing.JLabel bg2;
     private javax.swing.JLabel ccount;
-    private javax.swing.JTable charSearchTable;
+    private javax.swing.JTable charTable;
     private javax.swing.JButton createPlayer;
     public javax.swing.JLabel currentPlayerLabel;
     private javax.swing.JButton deleteButton;
@@ -703,9 +696,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JMenuItem logoutMenu;
+    private javax.swing.JScrollPane panething;
     private javax.swing.JLabel pcount;
     private javax.swing.JTabbedPane playerPane;
     private javax.swing.JTextField queryField;

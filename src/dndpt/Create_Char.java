@@ -403,27 +403,26 @@ public class Create_Char extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String sql = "INSERT INTO character VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,";
+        String sql = "INSERT INTO character VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,";
         String sql2 = " ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,";
-        String sql3 =  "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql3 =  "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             //set 17, 18, 19 to st check boxes
             //set 20-24 sk check boxes
-            //make wep1-3 into combo box populated by selection
             pst = conn.prepareStatement(sql + sql2 + sql3);
             pst.setString(1, Integer.toString(pid)); pst.setString(2, cname.getText()); pst.setString(3, clevel.getText());
             pst.setString(4, cclass.getSelectedItem().toString()); pst.setString(5, cbg.getSelectedItem().toString());
             pst.setString(6, crace.getSelectedItem().toString()); pst.setString(7, alignment.getSelectedItem().toString());
             pst.setString(8, "0"); pst.setString(9, cstr.getText());  pst.setString(10, cdex.getText()); pst.setString(11, ccon.getText());
             pst.setString(12, cint.getText()); pst.setString(13, cwis.getText()); pst.setString(14, ccha.getText()); pst.setString(15, inspiration.getText());
-            pst.setString(16, "0"); pst.setString(17, null); pst.setString(25, pass_perc.getText());  pst.setString(26, lang1.getText()); pst.setString(27, lang2.getText());
+            pst.setString(16, "0"); pst.setString(17, "0"); pst.setString(25, pass_perc.getText());  pst.setString(26, lang1.getText()); pst.setString(27, lang2.getText());
             pst.setString(28, lang3.getText());  pst.setString(29, "10");  pst.setString(30, initiative.getText()); pst.setString(31, speed.getText());
             pst.setString(32, hp.getText()); pst.setString(33, hp.getText()); pst.setString(34, hitDie.getText()); pst.setString(35, "0"); pst.setString(36, "0");
             pst.setString(40, g.getText()); pst.setString(41, s.getText()); pst.setString(42, c.getText());
             for (int i = 43; i < 52; i++){
                 pst.setString(i, "0");
             }
-            for (int i = 57; i < 62; i++){
+            for (int i = 57; i <= 62; i++){
                     pst.setString(i, "0");
                 }
             pst.setString(52, traits.getText());
@@ -432,15 +431,26 @@ public class Create_Char extends javax.swing.JFrame {
             if (selection.equals("Magical")) {
                 pst.setString(37, "0"); pst.setString(38, "0"); pst.setString(39, "0");
                 //53-61
-                pst.setString(53, getID("spell", spell1.getSelectedItem().toString())); 
-                pst.setString(54, getID("spell", spell2.getSelectedItem().toString())); 
-                pst.setString(55, getID("spell", spell3.getSelectedItem().toString()));
-                pst.setString(56, getID("spell", spell4.getSelectedItem().toString()));
+                pst.setString(54, getID("spell", spell1.getSelectedItem().toString())); 
+                pst.setString(55, getID("spell", spell2.getSelectedItem().toString())); 
+                pst.setString(56, getID("spell", spell3.getSelectedItem().toString()));
+                pst.setString(57, getID("spell", spell4.getSelectedItem().toString()));
                 for (int i = 37; i < 40; i++){
                     pst.setString(i, "0");
                 }
-            }
-        } catch(Exception e) {}
+            } else {
+                for(int i = 54; i < 58; i++){
+                    pst.setString(i, "0");
+                }
+                
+                pst.setString(37, getID("equipment", wep1.getSelectedItem().toString()));
+                pst.setString(38, getID("equipment", wep2.getSelectedItem().toString()));
+                pst.setString(39, getID("equipment", wep3.getSelectedItem().toString()));
+            }System.out.println("CHECK");
+            pst.executeUpdate();
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void hitDieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hitDieActionPerformed
@@ -450,18 +460,22 @@ public class Create_Char extends javax.swing.JFrame {
     public String getID(String table, String name) {
         String sql = "SELECT id, name FROM " + table + " WHERE name = ?";
         int result = 0;
+        PreparedStatement tpst = null;
+        ResultSet trs = null;
         try {
-            pst = conn.prepareStatement(sql);
-            pst.setString(1, name);
-            rs = pst.executeQuery();
-            result = rs.getInt("id");
+            
+            tpst = conn.prepareStatement(sql);
+            tpst.setString(1, name);
+            trs = tpst.executeQuery();
+            result = trs.getInt("id");
         }catch(Exception e) {}
         finally {
             try{
-                rs.close();
-                pst.close();
+                trs.close();
+                tpst.close();
             } catch (Exception e) {}
         }
+        System.out.println(result);
         return Integer.toString(result);
     }
     
