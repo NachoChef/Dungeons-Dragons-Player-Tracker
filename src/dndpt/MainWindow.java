@@ -6,7 +6,6 @@ package dndpt;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.sql.*;
 import net.proteanit.sql.DbUtils;
 
@@ -59,15 +58,16 @@ public class MainWindow extends javax.swing.JFrame {
         tabbedPane = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         currentPlayerLabel = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        charTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        updateCharName = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         pcount = new javax.swing.JLabel();
         ccount = new javax.swing.JLabel();
         icount = new javax.swing.JLabel();
         img = new javax.swing.JLabel();
+        deleteButton1 = new javax.swing.JButton();
+        updateButton1 = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        charSearchTable = new javax.swing.JTable();
         bg = new javax.swing.JLabel();
         adminPanel = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -117,72 +117,17 @@ public class MainWindow extends javax.swing.JFrame {
 
         currentPlayerLabel.setText("Active login:");
         jPanel1.add(currentPlayerLabel);
-        currentPlayerLabel.setBounds(10, 10, 120, 14);
-
-        charTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Name"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        charTable.setCellSelectionEnabled(true);
-        charTable.setOpaque(false);
-        charTable.getTableHeader().setReorderingAllowed(false);
-        charTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                charTableMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(charTable);
-        charTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        if (charTable.getColumnModel().getColumnCount() > 0) {
-            charTable.getColumnModel().getColumn(0).setMinWidth(22);
-            charTable.getColumnModel().getColumn(0).setPreferredWidth(22);
-            charTable.getColumnModel().getColumn(0).setMaxWidth(35);
-            charTable.getColumnModel().getColumn(1).setResizable(false);
-        }
-
-        jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 50, 230, 190);
+        currentPlayerLabel.setBounds(10, 10, 120, 16);
 
         jLabel1.setText("Your characters:");
         jLabel1.setMaximumSize(new java.awt.Dimension(110, 16));
         jLabel1.setMinimumSize(new java.awt.Dimension(110, 16));
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(10, 30, 130, 14);
-
-        updateCharName.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        updateCharName.setText("Rename");
-        updateCharName.setOpaque(false);
-        updateCharName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateCharNameActionPerformed(evt);
-            }
-        });
-        jPanel1.add(updateCharName);
-        updateCharName.setBounds(10, 240, 80, 21);
+        jLabel1.setBounds(10, 30, 130, 16);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jButton1.setText("Create Character");
         jButton1.setMaximumSize(new java.awt.Dimension(130, 23));
-        jButton1.setOpaque(false);
         jButton1.setPreferredSize(new java.awt.Dimension(120, 23));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,23 +135,69 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(107, 240, 130, 23);
+        jButton1.setBounds(280, 200, 130, 30);
 
         pcount.setText("Total player count:");
         jPanel1.add(pcount);
-        pcount.setBounds(350, 350, 180, 14);
+        pcount.setBounds(350, 350, 180, 16);
 
         ccount.setText("Total character count:");
         jPanel1.add(ccount);
-        ccount.setBounds(350, 370, 150, 14);
+        ccount.setBounds(350, 370, 150, 16);
 
         icount.setText("Total items in database:");
         jPanel1.add(icount);
-        icount.setBounds(350, 390, 130, 14);
+        icount.setBounds(350, 390, 130, 16);
 
         img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/drizzt.png"))); // NOI18N
         jPanel1.add(img);
         img.setBounds(-20, 280, 520, 390);
+
+        deleteButton1.setText("Delete Entry");
+        deleteButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(deleteButton1);
+        deleteButton1.setBounds(140, 200, 140, 29);
+
+        updateButton1.setText("Update Entry");
+        updateButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(updateButton1);
+        updateButton1.setBounds(0, 200, 140, 29);
+
+        jScrollPane5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane5.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        charSearchTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        charSearchTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        charSearchTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                charSearchTableMouseClicked(evt);
+            }
+        });
+        charSearchTable.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                charSearchTableKeyTyped(evt);
+            }
+        });
+        jScrollPane5.setViewportView(charSearchTable);
+        charSearchTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+        jPanel1.add(jScrollPane5);
+        jScrollPane5.setBounds(0, 50, 610, 150);
 
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/winter_mountain_painting-wallpaper-2560x1600.jpg"))); // NOI18N
         bg.setText("jLabel3");
@@ -225,7 +216,6 @@ public class MainWindow extends javax.swing.JFrame {
         jSeparator1.setBounds(10, 300, 610, 10);
 
         createPlayer.setText("New Player");
-        createPlayer.setOpaque(false);
         createPlayer.setPreferredSize(new java.awt.Dimension(100, 23));
         createPlayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -309,12 +299,12 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         adminPanel.add(tableCombo);
-        tableCombo.setBounds(10, 80, 140, 20);
+        tableCombo.setBounds(10, 80, 140, 27);
 
         jLabel2.setForeground(new java.awt.Color(250, 250, 250));
         jLabel2.setText("Search:");
         adminPanel.add(jLabel2);
-        jLabel2.setBounds(10, 60, 50, 14);
+        jLabel2.setBounds(10, 60, 50, 16);
 
         queryField.setText("query");
         queryField.addActionListener(new java.awt.event.ActionListener() {
@@ -323,27 +313,25 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         adminPanel.add(queryField);
-        queryField.setBounds(160, 80, 170, 20);
+        queryField.setBounds(160, 80, 170, 26);
 
         updateButton.setText("Update Entry");
-        updateButton.setOpaque(false);
         updateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateButtonActionPerformed(evt);
             }
         });
         adminPanel.add(updateButton);
-        updateButton.setBounds(10, 260, 140, 23);
+        updateButton.setBounds(10, 260, 140, 29);
 
         deleteButton.setText("Delete Entry");
-        deleteButton.setOpaque(false);
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteButtonActionPerformed(evt);
             }
         });
         adminPanel.add(deleteButton);
-        deleteButton.setBounds(150, 260, 140, 23);
+        deleteButton.setBounds(150, 260, 140, 29);
 
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -517,47 +505,8 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_createPlayerActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new Create_Char().setVisible(true);
+        new Create_Char(pid, conn).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void updateCharNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateCharNameActionPerformed
-        int row = charTable.getSelectedRow();
-        String newVal = (String)charTable.getModel().getValueAt(row, 2);
-        String sql = "UPDATE character SET name = ? WHERE character.id = ?";
-        try{
-            pst = conn.prepareStatement(sql);
-            pst.setString(1, newVal);
-            pst.setString(2, searchTable.getModel().getValueAt(row,0).toString());
-            pst.executeUpdate();
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(this,e);
-        }finally {
-            try{
-                rs.close();
-                pst.close();
-            } catch(Exception e) {
-                JOptionPane.showMessageDialog(this, e.getMessage());
-            }
-        }
-    }//GEN-LAST:event_updateCharNameActionPerformed
-
-    private void charTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_charTableMouseClicked
-        try{
-            int row = charTable.getSelectedRow();
-            //String Table_Click =  (charTable.getModel().getValueAt(row,0).toString());
-            String sql = "select * from character where is = ?";
-            pst = conn.prepareStatement(sql);
-            pst.setString(1, (String)charTable.getModel().getValueAt(row,0).toString());
-            rs = pst.executeQuery();
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }finally {
-            try{
-                rs.close();
-                pst.close();
-            } catch(Exception e) {}
-        }
-    }//GEN-LAST:event_charTableMouseClicked
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         new NewPassword(conn, this.pid).setVisible(true);
@@ -570,6 +519,37 @@ public class MainWindow extends javax.swing.JFrame {
     private void tableComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tableComboActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tableComboActionPerformed
+
+    private void deleteButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteButton1ActionPerformed
+
+    private void updateButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButton1ActionPerformed
+        try{
+            int row = charSearchTable.getSelectedRow();
+            int col = charSearchTable.getSelectedColumn();
+            String newVal = (String)charSearchTable.getModel().getValueAt(row,col);
+            String sql = "UPDATE character SET " + charSearchTable.getColumnName(col) + " = ? WHERE " +  charSearchTable.getColumnName(0) + " = " + charSearchTable.getModel().getValueAt(row,0).toString();
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, newVal);
+            pst.executeUpdate();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }finally {
+            try{
+                rs.close();
+                pst.close();
+            } catch(Exception e) {}
+        }
+    }//GEN-LAST:event_updateButton1ActionPerformed
+
+    private void charSearchTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_charSearchTableMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_charSearchTableMouseClicked
+
+    private void charSearchTableKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_charSearchTableKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_charSearchTableKeyTyped
 
     private void tabbedPaneFocusGained(java.awt.event.FocusEvent evt) {
         String sql = "SELECT pid, name, username, isAdmin FROM player";
@@ -624,21 +604,10 @@ public class MainWindow extends javax.swing.JFrame {
             pst = conn.prepareStatement(sql);
             pst.setString(1, Integer.toString(pid));
             rs = pst.executeQuery();
-            if(rs.next()){
-                DefaultTableModel model = (DefaultTableModel) table.getModel();
-                //looping through a ResultSet should be done with a do/while loop
-                //otherwise you miss the first result
-                do {
-                    model.addRow(new String[]{Integer.toString(rs.getInt("id")), rs.getString("name")});
-                } while(rs.next());
-                rs.close();
-                pst.close();
-            }
-        }
-        catch(Exception e)
-        {
-           JOptionPane.showMessageDialog(null, e);
-        }
+            table.setModel(DbUtils.resultSetToTableModel(rs));
+        }catch(Exception e){
+                JOptionPane.showMessageDialog(this, e.getMessage());
+        } 
         finally {
             try{
                 rs.close();
@@ -649,7 +618,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     //overload for default charTable
     public void getChars (int pid){
-        getChars (pid, charTable);
+        getChars (pid, charSearchTable);
     }
 
     public void search(String query, String toTable, JTable table){
@@ -712,10 +681,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel bg;
     private javax.swing.JLabel bg2;
     private javax.swing.JLabel ccount;
-    private javax.swing.JTable charTable;
+    private javax.swing.JTable charSearchTable;
     private javax.swing.JButton createPlayer;
     public javax.swing.JLabel currentPlayerLabel;
     private javax.swing.JButton deleteButton;
+    private javax.swing.JButton deleteButton1;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitItem;
     private javax.swing.JMenu fileMenu;
@@ -730,10 +700,10 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JMenuItem logoutMenu;
     private javax.swing.JLabel pcount;
@@ -744,6 +714,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tabbedPane;
     private javax.swing.JComboBox<String> tableCombo;
     private javax.swing.JButton updateButton;
-    private javax.swing.JButton updateCharName;
+    private javax.swing.JButton updateButton1;
     // End of variables declaration//GEN-END:variables
 }

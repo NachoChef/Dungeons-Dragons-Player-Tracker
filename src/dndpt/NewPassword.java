@@ -170,19 +170,27 @@ public class NewPassword extends javax.swing.JFrame {
                         pst = conn.prepareStatement(sql);
                         pst.execute();
                         JOptionPane.showMessageDialog(null,"Player Password Updated!");
+                        break;
                     }
                     else
                     {
                         JOptionPane.showMessageDialog(null,"New Passwords Do Not Match!");
+                        break;
                     }
                 }
                 else
                 {
                     JOptionPane.showMessageDialog(null,"Current Password Incorrect Or Missing Info");
+                    break;
                 }
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,e);
+        } finally {
+            try {
+                rs.close();
+                pst.close();
+            } catch (Exception e){}
         }
         this.setVisible(false);
         this.dispose();

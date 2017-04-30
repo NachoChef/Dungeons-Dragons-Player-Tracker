@@ -5,17 +5,35 @@
  */
 package dndpt;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /**
  *
  * @author Justin
  */
 public class Create_Char extends javax.swing.JFrame {
-
+    Connection conn;
+    PreparedStatement pst;
+    boolean playerAdmin = false;
+    int pid;
+    ResultSet rs;
     /**
      * Creates new form NewJFrame
      */
-    public Create_Char() {
+    public Create_Char(int pid, Connection conn) {
         initComponents();
+        this.conn = conn;
+        this.pid = pid;
+        spell1.setVisible(false);
+        spell2.setVisible(false);
+        spell3.setVisible(false);
+        spell4.setVisible(false);
+        wep1.setVisible(false);
+        wep2.setVisible(false);
+        wep3.setVisible(false);
+        
     }
 
     /**
@@ -65,9 +83,6 @@ public class Create_Char extends javax.swing.JFrame {
         ccon = new javax.swing.JTextField();
         cint = new javax.swing.JTextField();
         cwis = new javax.swing.JTextField();
-        wep1 = new javax.swing.JTextField();
-        wep2 = new javax.swing.JTextField();
-        wep3 = new javax.swing.JTextField();
         lang1 = new javax.swing.JTextField();
         lang2 = new javax.swing.JTextField();
         lang3 = new javax.swing.JTextField();
@@ -76,14 +91,23 @@ public class Create_Char extends javax.swing.JFrame {
         speed = new javax.swing.JTextField();
         vision = new javax.swing.JTextField();
         pass_perc = new javax.swing.JTextField();
-        traits = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        scrollyP = new javax.swing.JScrollPane();
+        traits = new javax.swing.JTextArea();
         att_type = new javax.swing.JComboBox<>();
         g = new javax.swing.JTextField();
         c = new javax.swing.JTextField();
         s = new javax.swing.JTextField();
         ccha4 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        hp = new javax.swing.JTextField();
+        hitDie = new javax.swing.JTextField();
+        spell4 = new javax.swing.JComboBox<>();
+        spell1 = new javax.swing.JComboBox<>();
+        spell2 = new javax.swing.JComboBox<>();
+        spell3 = new javax.swing.JComboBox<>();
+        wep3 = new javax.swing.JComboBox<>();
+        wep1 = new javax.swing.JComboBox<>();
+        wep2 = new javax.swing.JComboBox<>();
         bg = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -97,26 +121,25 @@ public class Create_Char extends javax.swing.JFrame {
 
         cname.setText("name");
         cname.setAutoscrolls(false);
-        cname.setOpaque(false);
         cname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cnameActionPerformed(evt);
             }
         });
         getContentPane().add(cname);
-        cname.setBounds(80, 70, 150, 20);
+        cname.setBounds(80, 70, 150, 26);
 
         clevel.setText("#");
         getContentPane().add(clevel);
-        clevel.setBounds(270, 70, 30, 20);
+        clevel.setBounds(270, 70, 30, 26);
 
         cclass.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Sorcerer", "Wizard" }));
         getContentPane().add(cclass);
-        cclass.setBounds(330, 50, 71, 20);
+        cclass.setBounds(320, 50, 114, 27);
 
         cbg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acolyte", "Charlatan", "Criminal", "Entertainer", "Folk Hero", "Guild Artisan", "Hermit", "Noble", "Outlander", "Sage", "Sailor", "Soldier", "Urchin" }));
         getContentPane().add(cbg);
-        cbg.setBounds(510, 50, 70, 20);
+        cbg.setBounds(510, 50, 100, 27);
 
         pname.setText("YOU");
         getContentPane().add(pname);
@@ -124,261 +147,223 @@ public class Create_Char extends javax.swing.JFrame {
 
         crace.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dragonborn", "Dwarf", "Eladrin", "Elf", "Gnome", "Half-elf", "Half-orc", "Halfling", "Human", "Tiefling" }));
         getContentPane().add(crace);
-        crace.setBounds(410, 50, 90, 20);
+        crace.setBounds(420, 50, 90, 27);
 
         alignment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lawful Good", "Neutral Good", "Chaotic Good", "Lawful Neutral", "Neutral", "Chaotic Neutral", "Lawful Evil", "Neutral Evil", "Chaotic Evil" }));
-        alignment.setOpaque(false);
         getContentPane().add(alignment);
-        alignment.setBounds(460, 80, 120, 20);
+        alignment.setBounds(460, 80, 120, 27);
 
         group.setText("jTextField1");
-        group.setOpaque(false);
         getContentPane().add(group);
-        group.setBounds(590, 80, 110, 20);
-
-        st_str.setOpaque(false);
+        group.setBounds(590, 80, 110, 26);
         getContentPane().add(st_str);
-        st_str.setBounds(120, 230, 20, 21);
-
-        st_dex.setOpaque(false);
+        st_str.setBounds(120, 230, 20, 23);
         getContentPane().add(st_dex);
-        st_dex.setBounds(120, 240, 20, 21);
-
-        st_con.setOpaque(false);
+        st_dex.setBounds(120, 240, 20, 23);
         getContentPane().add(st_con);
-        st_con.setBounds(120, 260, 20, 21);
-
-        st_int.setOpaque(false);
+        st_con.setBounds(120, 260, 20, 23);
         getContentPane().add(st_int);
-        st_int.setBounds(120, 280, 20, 21);
-
-        st_wis.setOpaque(false);
+        st_int.setBounds(120, 280, 20, 23);
         getContentPane().add(st_wis);
-        st_wis.setBounds(120, 290, 20, 21);
-
-        st_cha.setOpaque(false);
+        st_wis.setBounds(120, 290, 20, 23);
         getContentPane().add(st_cha);
-        st_cha.setBounds(120, 310, 20, 21);
-
-        acr.setOpaque(false);
+        st_cha.setBounds(120, 310, 20, 23);
         getContentPane().add(acr);
-        acr.setBounds(120, 370, 20, 21);
-
-        ani.setOpaque(false);
+        acr.setBounds(120, 370, 20, 23);
         getContentPane().add(ani);
-        ani.setBounds(120, 380, 20, 21);
-
-        arc.setOpaque(false);
+        ani.setBounds(120, 380, 20, 23);
         getContentPane().add(arc);
-        arc.setBounds(120, 400, 20, 21);
-
-        ath.setOpaque(false);
+        arc.setBounds(120, 400, 20, 23);
         getContentPane().add(ath);
-        ath.setBounds(120, 420, 20, 21);
-
-        dec.setOpaque(false);
+        ath.setBounds(120, 420, 20, 23);
         getContentPane().add(dec);
-        dec.setBounds(120, 430, 20, 21);
-
-        his.setOpaque(false);
+        dec.setBounds(120, 430, 20, 23);
         getContentPane().add(his);
-        his.setBounds(120, 450, 20, 21);
-
-        ins.setOpaque(false);
+        his.setBounds(120, 450, 20, 23);
         getContentPane().add(ins);
-        ins.setBounds(120, 470, 20, 21);
-
-        inti.setOpaque(false);
+        ins.setBounds(120, 470, 20, 23);
         getContentPane().add(inti);
-        inti.setBounds(120, 480, 20, 21);
-
-        inv.setOpaque(false);
+        inti.setBounds(120, 480, 20, 23);
         getContentPane().add(inv);
-        inv.setBounds(120, 500, 20, 21);
-
-        med.setOpaque(false);
+        inv.setBounds(120, 500, 20, 23);
         getContentPane().add(med);
-        med.setBounds(120, 520, 20, 21);
-
-        nat.setOpaque(false);
+        med.setBounds(120, 520, 20, 23);
         getContentPane().add(nat);
-        nat.setBounds(120, 530, 20, 21);
-
-        perc.setOpaque(false);
+        nat.setBounds(120, 530, 20, 23);
         getContentPane().add(perc);
-        perc.setBounds(120, 550, 20, 21);
-
-        perf.setOpaque(false);
+        perc.setBounds(120, 550, 20, 23);
         getContentPane().add(perf);
-        perf.setBounds(120, 570, 20, 21);
-
-        pers.setOpaque(false);
+        perf.setBounds(120, 570, 20, 23);
         getContentPane().add(pers);
-        pers.setBounds(120, 580, 20, 21);
-
-        rel.setOpaque(false);
+        pers.setBounds(120, 580, 20, 23);
         getContentPane().add(rel);
-        rel.setBounds(120, 600, 20, 21);
-
-        sle.setOpaque(false);
+        rel.setBounds(120, 600, 20, 23);
         getContentPane().add(sle);
-        sle.setBounds(120, 620, 20, 21);
-
-        ste.setOpaque(false);
+        sle.setBounds(120, 620, 20, 23);
         getContentPane().add(ste);
-        ste.setBounds(120, 630, 20, 21);
-
-        sur.setOpaque(false);
+        ste.setBounds(120, 630, 20, 23);
         getContentPane().add(sur);
-        sur.setBounds(120, 650, 20, 21);
+        sur.setBounds(120, 650, 20, 23);
 
         cstr.setForeground(new java.awt.Color(102, 102, 102));
         cstr.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         cstr.setText("15");
-        cstr.setOpaque(false);
         getContentPane().add(cstr);
         cstr.setBounds(50, 220, 40, 30);
 
         ccha.setForeground(new java.awt.Color(102, 102, 102));
         ccha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         ccha.setText("8");
-        ccha.setOpaque(false);
         getContentPane().add(ccha);
         ccha.setBounds(50, 680, 40, 30);
 
         cdex.setForeground(new java.awt.Color(102, 102, 102));
         cdex.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         cdex.setText("14");
-        cdex.setOpaque(false);
         getContentPane().add(cdex);
         cdex.setBounds(50, 310, 40, 30);
 
         ccon.setForeground(new java.awt.Color(102, 102, 102));
         ccon.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         ccon.setText("13");
-        ccon.setOpaque(false);
         getContentPane().add(ccon);
         ccon.setBounds(50, 400, 40, 30);
 
         cint.setForeground(new java.awt.Color(102, 102, 102));
         cint.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         cint.setText("12");
-        cint.setOpaque(false);
         getContentPane().add(cint);
         cint.setBounds(50, 490, 40, 30);
 
         cwis.setForeground(new java.awt.Color(102, 102, 102));
         cwis.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         cwis.setText("10");
-        cwis.setOpaque(false);
         getContentPane().add(cwis);
         cwis.setBounds(50, 590, 40, 30);
 
-        wep1.setText("Dagger");
-        wep1.setOpaque(false);
-        getContentPane().add(wep1);
-        wep1.setBounds(280, 350, 150, 20);
-
-        wep2.setText("Dagger");
-        wep2.setOpaque(false);
-        wep2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                wep2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(wep2);
-        wep2.setBounds(280, 380, 150, 20);
-
-        wep3.setText("Dagger");
-        wep3.setOpaque(false);
-        getContentPane().add(wep3);
-        wep3.setBounds(280, 420, 150, 20);
-
         lang1.setText("language");
         getContentPane().add(lang1);
-        lang1.setBounds(50, 740, 50, 20);
+        lang1.setBounds(50, 740, 67, 26);
 
         lang2.setText("language");
         getContentPane().add(lang2);
-        lang2.setBounds(50, 760, 50, 20);
+        lang2.setBounds(50, 760, 67, 26);
 
         lang3.setText("language");
         getContentPane().add(lang3);
-        lang3.setBounds(50, 780, 50, 20);
+        lang3.setBounds(50, 780, 67, 26);
 
         inspiration.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         inspiration.setText("0");
-        inspiration.setOpaque(false);
         getContentPane().add(inspiration);
-        inspiration.setBounds(120, 150, 30, 20);
+        inspiration.setBounds(120, 150, 30, 26);
 
         initiative.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         initiative.setText("0");
-        initiative.setOpaque(false);
         getContentPane().add(initiative);
-        initiative.setBounds(652, 170, 50, 20);
+        initiative.setBounds(652, 170, 50, 26);
 
         speed.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         speed.setText("25");
-        speed.setOpaque(false);
         getContentPane().add(speed);
         speed.setBounds(660, 220, 30, 30);
 
         vision.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         vision.setText("25");
-        vision.setOpaque(false);
         getContentPane().add(vision);
         vision.setBounds(660, 270, 30, 30);
 
         pass_perc.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pass_perc.setText("0");
-        pass_perc.setOpaque(false);
         getContentPane().add(pass_perc);
         pass_perc.setBounds(119, 700, 40, 20);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        traits.setViewportView(jTextArea1);
+        traits.setColumns(20);
+        traits.setRows(5);
+        scrollyP.setViewportView(traits);
 
-        getContentPane().add(traits);
-        traits.setBounds(280, 550, 450, 160);
+        getContentPane().add(scrollyP);
+        scrollyP.setBounds(280, 550, 450, 160);
 
         att_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Magical", "Non-Magical" }));
+        att_type.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                att_typeActionPerformed(evt);
+            }
+        });
         getContentPane().add(att_type);
-        att_type.setBounds(290, 500, 130, 20);
+        att_type.setBounds(290, 500, 130, 27);
 
         g.setForeground(new java.awt.Color(102, 102, 102));
         g.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         g.setText("0");
-        g.setOpaque(false);
         getContentPane().add(g);
         g.setBounds(290, 880, 40, 30);
 
         c.setForeground(new java.awt.Color(102, 102, 102));
         c.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         c.setText("0");
-        c.setOpaque(false);
         getContentPane().add(c);
         c.setBounds(290, 790, 40, 30);
 
         s.setForeground(new java.awt.Color(102, 102, 102));
         s.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         s.setText("0");
-        s.setOpaque(false);
         getContentPane().add(s);
         s.setBounds(290, 820, 40, 30);
 
         ccha4.setForeground(new java.awt.Color(102, 102, 102));
         ccha4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         ccha4.setText("0");
-        ccha4.setOpaque(false);
         getContentPane().add(ccha4);
         ccha4.setBounds(290, 850, 40, 30);
 
         jButton1.setBackground(new java.awt.Color(204, 204, 255));
         jButton1.setText("Submit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1);
         jButton1.setBounds(650, 0, 110, 30);
+
+        hp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        hp.setText("0");
+        getContentPane().add(hp);
+        hp.setBounds(340, 260, 18, 26);
+
+        hitDie.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        hitDie.setText("1d12");
+        hitDie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hitDieActionPerformed(evt);
+            }
+        });
+        getContentPane().add(hitDie);
+        hitDie.setBounds(520, 160, 90, 80);
+
+        getContentPane().add(spell4);
+        spell4.setBounds(290, 440, 200, 27);
+
+        getContentPane().add(spell1);
+        spell1.setBounds(290, 350, 200, 27);
+
+        getContentPane().add(spell2);
+        spell2.setBounds(290, 380, 200, 27);
+
+        getContentPane().add(spell3);
+        spell3.setBounds(290, 410, 200, 27);
+
+        getContentPane().add(wep3);
+        wep3.setBounds(290, 410, 200, 27);
+
+        getContentPane().add(wep1);
+        wep1.setBounds(290, 350, 200, 27);
+
+        wep2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        getContentPane().add(wep2);
+        wep2.setBounds(290, 380, 200, 27);
 
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/dndcharsheet copy.png"))); // NOI18N
         getContentPane().add(bg);
@@ -413,53 +398,130 @@ public class Create_Char extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cnameActionPerformed
 
-    private void wep2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wep2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_wep2ActionPerformed
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void setVisible() {
-        new Create_Char().setVisible(true);
-    }
-    
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String sql = "INSERT INTO character VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,";
+        String sql2 = " ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,";
+        String sql3 =  "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+            //set 17, 18, 19 to st check boxes
+            //set 20-24 sk check boxes
+            //make wep1-3 into combo box populated by selection
+            pst = conn.prepareStatement(sql + sql2 + sql3);
+            pst.setString(1, Integer.toString(pid)); pst.setString(2, cname.getText()); pst.setString(3, clevel.getText());
+            pst.setString(4, cclass.getSelectedItem().toString()); pst.setString(5, cbg.getSelectedItem().toString());
+            pst.setString(6, crace.getSelectedItem().toString()); pst.setString(7, alignment.getSelectedItem().toString());
+            pst.setString(8, "0"); pst.setString(9, cstr.getText());  pst.setString(10, cdex.getText()); pst.setString(11, ccon.getText());
+            pst.setString(12, cint.getText()); pst.setString(13, cwis.getText()); pst.setString(14, ccha.getText()); pst.setString(15, inspiration.getText());
+            pst.setString(16, "0"); pst.setString(17, null); pst.setString(25, pass_perc.getText());  pst.setString(26, lang1.getText()); pst.setString(27, lang2.getText());
+            pst.setString(28, lang3.getText());  pst.setString(29, "10");  pst.setString(30, initiative.getText()); pst.setString(31, speed.getText());
+            pst.setString(32, hp.getText()); pst.setString(33, hp.getText()); pst.setString(34, hitDie.getText()); pst.setString(35, "0"); pst.setString(36, "0");
+            pst.setString(40, g.getText()); pst.setString(41, s.getText()); pst.setString(42, c.getText());
+            for (int i = 43; i < 52; i++){
+                pst.setString(i, "0");
+            }
+            for (int i = 57; i < 62; i++){
+                    pst.setString(i, "0");
+                }
+            pst.setString(52, traits.getText());
+            
+            String selection = att_type.getSelectedItem().toString();
+            if (selection.equals("Magical")) {
+                pst.setString(37, "0"); pst.setString(38, "0"); pst.setString(39, "0");
+                //53-61
+                pst.setString(53, getID("spell", spell1.getSelectedItem().toString())); 
+                pst.setString(54, getID("spell", spell2.getSelectedItem().toString())); 
+                pst.setString(55, getID("spell", spell3.getSelectedItem().toString()));
+                pst.setString(56, getID("spell", spell4.getSelectedItem().toString()));
+                for (int i = 37; i < 40; i++){
+                    pst.setString(i, "0");
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Create_Char.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Create_Char.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Create_Char.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Create_Char.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+        } catch(Exception e) {}
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Create_Char().setVisible(true);
-            }
-        });
+    private void hitDieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hitDieActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_hitDieActionPerformed
+
+    public String getID(String table, String name) {
+        String sql = "SELECT id, name FROM " + table + " WHERE name = ?";
+        int result = 0;
+        try {
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, name);
+            rs = pst.executeQuery();
+            result = rs.getInt("id");
+        }catch(Exception e) {}
+        finally {
+            try{
+                rs.close();
+                pst.close();
+            } catch (Exception e) {}
+        }
+        return Integer.toString(result);
     }
+    
+    private void att_typeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_att_typeActionPerformed
+        String selection = att_type.getSelectedItem().toString();
+        if (selection.equals("Magical")){
+            spell1.setVisible(true);
+            spell2.setVisible(true);
+            spell3.setVisible(true);
+            spell4.setVisible(true);
+            wep1.setVisible(false);
+            wep2.setVisible(false);
+            wep3.setVisible(false);
+            String sql = "SELECT name FROM spell";
+            try {
+                pst = conn.prepareStatement(sql);
+                rs = pst.executeQuery();
+                while(rs.next()){
+                    String name = rs.getString("name");
+                    spell1.addItem(name); spell2.addItem(name);
+                    spell3.addItem(name); spell4.addItem(name);
+                }
+                
+            } catch(Exception e) {}
+            finally {
+                try {
+                    rs.close();
+                    pst.close();
+                }catch (Exception e){}
+            }
+                
+        } else {
+            spell1.setVisible(false);
+            spell2.setVisible(false);
+            spell3.setVisible(false);
+            spell4.setVisible(false);
+            wep1.setVisible(true);
+            wep2.setVisible(true);
+            wep3.setVisible(true);
+            String sql = "SELECT name FROM equipment WHERE family = ?";
+            try {
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, "Weapons");
+                rs = pst.executeQuery();
+                while(rs.next()){
+                    String name = rs.getString("name");
+                    wep1.addItem(name); wep2.addItem(name);
+                    wep3.addItem(name);
+                }
+                
+            } catch(Exception e) {}
+            finally {
+                try {
+                    rs.close();
+                    pst.close();
+                }catch (Exception e){}
+            }
+        } 
+                
+    }//GEN-LAST:event_att_typeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox acr;
@@ -486,6 +548,8 @@ public class Create_Char extends javax.swing.JFrame {
     private javax.swing.JTextField g;
     private javax.swing.JTextField group;
     private javax.swing.JCheckBox his;
+    private javax.swing.JTextField hitDie;
+    private javax.swing.JTextField hp;
     private javax.swing.JTextField initiative;
     private javax.swing.JCheckBox ins;
     private javax.swing.JTextField inspiration;
@@ -495,7 +559,6 @@ public class Create_Char extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField lang1;
     private javax.swing.JTextField lang2;
     private javax.swing.JTextField lang3;
@@ -508,8 +571,13 @@ public class Create_Char extends javax.swing.JFrame {
     private javax.swing.JLabel pname;
     private javax.swing.JCheckBox rel;
     private javax.swing.JTextField s;
+    private javax.swing.JScrollPane scrollyP;
     private javax.swing.JCheckBox sle;
     private javax.swing.JTextField speed;
+    private javax.swing.JComboBox<String> spell1;
+    private javax.swing.JComboBox<String> spell2;
+    private javax.swing.JComboBox<String> spell3;
+    private javax.swing.JComboBox<String> spell4;
     private javax.swing.JCheckBox st_cha;
     private javax.swing.JCheckBox st_con;
     private javax.swing.JCheckBox st_dex;
@@ -518,10 +586,10 @@ public class Create_Char extends javax.swing.JFrame {
     private javax.swing.JCheckBox st_wis;
     private javax.swing.JCheckBox ste;
     private javax.swing.JCheckBox sur;
-    private javax.swing.JScrollPane traits;
+    private javax.swing.JTextArea traits;
     private javax.swing.JTextField vision;
-    private javax.swing.JTextField wep1;
-    private javax.swing.JTextField wep2;
-    private javax.swing.JTextField wep3;
+    private javax.swing.JComboBox<String> wep1;
+    private javax.swing.JComboBox<String> wep2;
+    private javax.swing.JComboBox<String> wep3;
     // End of variables declaration//GEN-END:variables
 }
