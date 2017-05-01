@@ -32,16 +32,16 @@ public class MainWindow extends javax.swing.JFrame {
         this.uname = uname;
         this.isAdmin = isAdmin;
         this.pid = pid;
-        currentPlayerLabel.setText(String.valueOf("Logged in as: " + uname));
-        icount.setText(String.valueOf("Total items in database: " + getStats("equipment")));
-        pcount.setText(String.valueOf("Total player count: " + getStats("player")));
-        ccount.setText(String.valueOf("Total character count: " + getStats("character")));
         this.setVisible(true);
         //disable admin pane if not admin
         //test to add entries to JTable:
         if (!this.isAdmin)
             this.tabbedPane.setEnabledAt(1, false);
         this.conn = conn;
+        currentPlayerLabel.setText(String.valueOf("Logged in as: " + uname));
+        icount.setText("Total items in database: " + getStats("equipment"));
+        pcount.setText("Total player count: " + getStats("player"));
+        ccount.setText("Total character count: " + getStats("character"));
         this.getChars(pid, charTable);
         hat.setVisible(false);
     }
@@ -148,7 +148,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         icount.setText("Total items in database:");
         jPanel1.add(icount);
-        icount.setBounds(350, 390, 130, 16);
+        icount.setBounds(350, 390, 210, 16);
 
         hat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/hat.png"))); // NOI18N
         jPanel1.add(hat);
@@ -582,17 +582,16 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private String getStats(String table){
-        String sql = "SELECT * FROM " + table;
-        String result = "ERROR";
+        String sql = "SELECT COUNT(*) AS rows FROM " + table;
+        int res = 0;
         try{
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
-            rs.last();
-            result = Integer.toString(rs.getRow());
-        }catch(Exception e){}
-        return result;
+            rs.next();
+            res = rs.getInt("rows");
+        }catch(Exception e){ System.out.println(e.getMessage());}
+        return Integer.toString(res);
     }
-    
     
     /**
      *
