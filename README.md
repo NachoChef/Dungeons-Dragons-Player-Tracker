@@ -1,4 +1,4 @@
-![alt text](https://github.com/NachoChef/Dungeons-Dragons-Player-Tracker/blob/dontfuckmeup/src/Resources/dndlogo.png "DNDPT logo")
+![alt text](https://github.com/NachoChef/Dungeons-Dragons-Player-Tracker/blob/dontfuckmeup/src/Resources/dndlogo.png "DNDPT logo")   
 DnD Player Tracker
 ======
 -This is a database-driven program developed for a semester-long class project. The program allows player and character tracking for the game Dungeons & Dragons, 3.5ed.
