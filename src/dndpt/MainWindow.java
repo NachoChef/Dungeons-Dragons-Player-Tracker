@@ -65,11 +65,6 @@ public class MainWindow extends javax.swing.JFrame{
         img = new javax.swing.JLabel();
         deleteButton1 = new javax.swing.JButton();
         updateButton1 = new javax.swing.JButton();
-        bMode4 = new javax.swing.JLabel();
-        bMode2 = new javax.swing.JLabel();
-        bMode3 = new javax.swing.JLabel();
-        bMode1 = new javax.swing.JLabel();
-        bMode5 = new javax.swing.JLabel();
         panething = new javax.swing.JScrollPane();
         charTable = new javax.swing.JTable();
         burrisbutton = new javax.swing.JButton();
@@ -122,18 +117,17 @@ public class MainWindow extends javax.swing.JFrame{
 
         currentPlayerLabel.setText("Active login:");
         jPanel1.add(currentPlayerLabel);
-        currentPlayerLabel.setBounds(10, 10, 120, 14);
+        currentPlayerLabel.setBounds(10, 10, 120, 16);
 
         jLabel1.setText("Your characters:");
         jLabel1.setMaximumSize(new java.awt.Dimension(110, 16));
         jLabel1.setMinimumSize(new java.awt.Dimension(110, 16));
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(10, 30, 130, 14);
+        jLabel1.setBounds(10, 30, 130, 16);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jButton1.setText("Create Character");
         jButton1.setMaximumSize(new java.awt.Dimension(130, 23));
-        jButton1.setOpaque(false);
         jButton1.setPreferredSize(new java.awt.Dimension(120, 23));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,15 +139,15 @@ public class MainWindow extends javax.swing.JFrame{
 
         pcount.setText("Total player count:");
         jPanel1.add(pcount);
-        pcount.setBounds(350, 350, 180, 14);
+        pcount.setBounds(350, 350, 180, 16);
 
         ccount.setText("Total character count:");
         jPanel1.add(ccount);
-        ccount.setBounds(350, 370, 150, 14);
+        ccount.setBounds(350, 370, 150, 16);
 
         icount.setText("Total items in database:");
         jPanel1.add(icount);
-        icount.setBounds(350, 390, 210, 14);
+        icount.setBounds(350, 390, 210, 16);
 
         hat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/hat.png"))); // NOI18N
         hat.setVisible(false);
@@ -165,49 +159,22 @@ public class MainWindow extends javax.swing.JFrame{
         img.setBounds(-30, 320, 390, 320);
 
         deleteButton1.setText("Delete Entry");
-        deleteButton1.setOpaque(false);
         deleteButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteButton1ActionPerformed(evt);
             }
         });
         jPanel1.add(deleteButton1);
-        deleteButton1.setBounds(140, 200, 140, 23);
+        deleteButton1.setBounds(140, 200, 140, 29);
 
         updateButton1.setText("Update Entry");
-        updateButton1.setOpaque(false);
         updateButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateButton1ActionPerformed(evt);
             }
         });
         jPanel1.add(updateButton1);
-        updateButton1.setBounds(0, 200, 140, 23);
-
-        bMode4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/hat.png"))); // NOI18N
-        bMode4.setVisible(false);
-        jPanel1.add(bMode4);
-        bMode4.setBounds(150, -50, 180, 230);
-
-        bMode2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/hat.png"))); // NOI18N
-        bMode2.setVisible(false);
-        jPanel1.add(bMode2);
-        bMode2.setBounds(470, -60, 180, 230);
-
-        bMode3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/hat.png"))); // NOI18N
-        bMode3.setVisible(false);
-        jPanel1.add(bMode3);
-        bMode3.setBounds(170, 360, 180, 230);
-
-        bMode1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/hat.png"))); // NOI18N
-        bMode1.setVisible(false);
-        jPanel1.add(bMode1);
-        bMode1.setBounds(420, 360, 180, 160);
-
-        bMode5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/hat.png"))); // NOI18N
-        bMode5.setVisible(false);
-        jPanel1.add(bMode5);
-        bMode5.setBounds(280, 180, 180, 230);
+        updateButton1.setBounds(0, 200, 140, 29);
 
         charTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -251,7 +218,6 @@ public class MainWindow extends javax.swing.JFrame{
         jSeparator1.setBounds(10, 300, 610, 10);
 
         createPlayer.setText("New Player");
-        createPlayer.setOpaque(false);
         createPlayer.setPreferredSize(new java.awt.Dimension(100, 23));
         createPlayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -335,12 +301,12 @@ public class MainWindow extends javax.swing.JFrame{
             }
         });
         adminPanel.add(tableCombo);
-        tableCombo.setBounds(10, 80, 140, 20);
+        tableCombo.setBounds(10, 80, 140, 27);
 
         jLabel2.setForeground(new java.awt.Color(250, 250, 250));
         jLabel2.setText("Search:");
         adminPanel.add(jLabel2);
-        jLabel2.setBounds(10, 60, 50, 14);
+        jLabel2.setBounds(10, 60, 50, 16);
 
         queryField.setText("query");
         queryField.addActionListener(new java.awt.event.ActionListener() {
@@ -349,27 +315,25 @@ public class MainWindow extends javax.swing.JFrame{
             }
         });
         adminPanel.add(queryField);
-        queryField.setBounds(160, 80, 170, 20);
+        queryField.setBounds(160, 80, 170, 26);
 
         updateButton.setText("Update Entry");
-        updateButton.setOpaque(false);
         updateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateButtonActionPerformed(evt);
             }
         });
         adminPanel.add(updateButton);
-        updateButton.setBounds(10, 260, 140, 23);
+        updateButton.setBounds(10, 260, 140, 29);
 
         deleteButton.setText("Delete Entry");
-        deleteButton.setOpaque(false);
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteButtonActionPerformed(evt);
             }
         });
         adminPanel.add(deleteButton);
-        deleteButton.setBounds(150, 260, 140, 23);
+        deleteButton.setBounds(150, 260, 140, 29);
 
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -739,11 +703,6 @@ public class MainWindow extends javax.swing.JFrame{
     private javax.swing.JTable adminCTable;
     private javax.swing.JTable adminPTable;
     private javax.swing.JPanel adminPanel;
-    private javax.swing.JLabel bMode1;
-    private javax.swing.JLabel bMode2;
-    private javax.swing.JLabel bMode3;
-    private javax.swing.JLabel bMode4;
-    private javax.swing.JLabel bMode5;
     private javax.swing.JLabel bg;
     private javax.swing.JLabel bg2;
     private javax.swing.JButton burrisbutton;
