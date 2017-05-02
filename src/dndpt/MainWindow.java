@@ -13,7 +13,7 @@ import net.proteanit.sql.DbUtils;
  *
  * @author Justin Jones
  */
-public class MainWindow extends javax.swing.JFrame {
+public class MainWindow extends javax.swing.JFrame{
     //global user identifier fields
     String uname;
     boolean isAdmin = false;
@@ -43,7 +43,6 @@ public class MainWindow extends javax.swing.JFrame {
         pcount.setText("Total player count: " + getStats("player"));
         ccount.setText("Total character count: " + getStats("character"));
         this.getChars(pid, charTable);
-        hat.setVisible(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,6 +65,11 @@ public class MainWindow extends javax.swing.JFrame {
         img = new javax.swing.JLabel();
         deleteButton1 = new javax.swing.JButton();
         updateButton1 = new javax.swing.JButton();
+        bMode4 = new javax.swing.JLabel();
+        bMode2 = new javax.swing.JLabel();
+        bMode3 = new javax.swing.JLabel();
+        bMode1 = new javax.swing.JLabel();
+        bMode5 = new javax.swing.JLabel();
         panething = new javax.swing.JScrollPane();
         charTable = new javax.swing.JTable();
         burrisbutton = new javax.swing.JButton();
@@ -118,17 +122,18 @@ public class MainWindow extends javax.swing.JFrame {
 
         currentPlayerLabel.setText("Active login:");
         jPanel1.add(currentPlayerLabel);
-        currentPlayerLabel.setBounds(10, 10, 120, 16);
+        currentPlayerLabel.setBounds(10, 10, 120, 14);
 
         jLabel1.setText("Your characters:");
         jLabel1.setMaximumSize(new java.awt.Dimension(110, 16));
         jLabel1.setMinimumSize(new java.awt.Dimension(110, 16));
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(10, 30, 130, 16);
+        jLabel1.setBounds(10, 30, 130, 14);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jButton1.setText("Create Character");
         jButton1.setMaximumSize(new java.awt.Dimension(130, 23));
+        jButton1.setOpaque(false);
         jButton1.setPreferredSize(new java.awt.Dimension(120, 23));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,45 +141,73 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(280, 200, 130, 30);
+        jButton1.setBounds(280, 200, 130, 23);
 
         pcount.setText("Total player count:");
         jPanel1.add(pcount);
-        pcount.setBounds(350, 350, 180, 16);
+        pcount.setBounds(350, 350, 180, 14);
 
         ccount.setText("Total character count:");
         jPanel1.add(ccount);
-        ccount.setBounds(350, 370, 150, 16);
+        ccount.setBounds(350, 370, 150, 14);
 
         icount.setText("Total items in database:");
         jPanel1.add(icount);
-        icount.setBounds(350, 390, 210, 16);
+        icount.setBounds(350, 390, 210, 14);
 
         hat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/hat.png"))); // NOI18N
+        hat.setVisible(false);
         jPanel1.add(hat);
-        hat.setBounds(80, 200, 180, 230);
+        hat.setBounds(60, 250, 180, 120);
 
         img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/drizzt.png"))); // NOI18N
         jPanel1.add(img);
-        img.setBounds(-20, 280, 520, 390);
+        img.setBounds(-30, 320, 390, 320);
 
         deleteButton1.setText("Delete Entry");
+        deleteButton1.setOpaque(false);
         deleteButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteButton1ActionPerformed(evt);
             }
         });
         jPanel1.add(deleteButton1);
-        deleteButton1.setBounds(140, 200, 140, 29);
+        deleteButton1.setBounds(140, 200, 140, 23);
 
         updateButton1.setText("Update Entry");
+        updateButton1.setOpaque(false);
         updateButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateButton1ActionPerformed(evt);
             }
         });
         jPanel1.add(updateButton1);
-        updateButton1.setBounds(0, 200, 140, 29);
+        updateButton1.setBounds(0, 200, 140, 23);
+
+        bMode4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/hat.png"))); // NOI18N
+        bMode4.setVisible(false);
+        jPanel1.add(bMode4);
+        bMode4.setBounds(150, -50, 180, 230);
+
+        bMode2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/hat.png"))); // NOI18N
+        bMode2.setVisible(false);
+        jPanel1.add(bMode2);
+        bMode2.setBounds(470, -60, 180, 230);
+
+        bMode3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/hat.png"))); // NOI18N
+        bMode3.setVisible(false);
+        jPanel1.add(bMode3);
+        bMode3.setBounds(170, 360, 180, 230);
+
+        bMode1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/hat.png"))); // NOI18N
+        bMode1.setVisible(false);
+        jPanel1.add(bMode1);
+        bMode1.setBounds(420, 360, 180, 160);
+
+        bMode5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/hat.png"))); // NOI18N
+        bMode5.setVisible(false);
+        jPanel1.add(bMode5);
+        bMode5.setBounds(280, 180, 180, 230);
 
         charTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -190,7 +223,7 @@ public class MainWindow extends javax.swing.JFrame {
         panething.setViewportView(charTable);
 
         jPanel1.add(panething);
-        panething.setBounds(0, 50, 610, 150);
+        panething.setBounds(0, 50, 630, 150);
 
         burrisbutton.setBackground(new java.awt.Color(0, 0, 0));
         burrisbutton.addActionListener(new java.awt.event.ActionListener() {
@@ -218,6 +251,7 @@ public class MainWindow extends javax.swing.JFrame {
         jSeparator1.setBounds(10, 300, 610, 10);
 
         createPlayer.setText("New Player");
+        createPlayer.setOpaque(false);
         createPlayer.setPreferredSize(new java.awt.Dimension(100, 23));
         createPlayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,10 +289,7 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
-                .addGap(14, 14, 14))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,19 +328,19 @@ public class MainWindow extends javax.swing.JFrame {
         adminPanel.add(playerPane);
         playerPane.setBounds(10, 310, 610, 290);
 
-        tableCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "character", "character_stats", "class", "class_table", "equipment", "item", "player", "skill", "spell" }));
+        tableCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "character", "class", "equipment", "item", "player", "skill", "spell" }));
         tableCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tableComboActionPerformed(evt);
             }
         });
         adminPanel.add(tableCombo);
-        tableCombo.setBounds(10, 80, 140, 27);
+        tableCombo.setBounds(10, 80, 140, 20);
 
         jLabel2.setForeground(new java.awt.Color(250, 250, 250));
         jLabel2.setText("Search:");
         adminPanel.add(jLabel2);
-        jLabel2.setBounds(10, 60, 50, 16);
+        jLabel2.setBounds(10, 60, 50, 14);
 
         queryField.setText("query");
         queryField.addActionListener(new java.awt.event.ActionListener() {
@@ -318,25 +349,27 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         adminPanel.add(queryField);
-        queryField.setBounds(160, 80, 170, 26);
+        queryField.setBounds(160, 80, 170, 20);
 
         updateButton.setText("Update Entry");
+        updateButton.setOpaque(false);
         updateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateButtonActionPerformed(evt);
             }
         });
         adminPanel.add(updateButton);
-        updateButton.setBounds(10, 260, 140, 29);
+        updateButton.setBounds(10, 260, 140, 23);
 
         deleteButton.setText("Delete Entry");
+        deleteButton.setOpaque(false);
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteButtonActionPerformed(evt);
             }
         });
         adminPanel.add(deleteButton);
-        deleteButton.setBounds(150, 260, 140, 29);
+        deleteButton.setBounds(150, 260, 140, 23);
 
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -466,7 +499,7 @@ public class MainWindow extends javax.swing.JFrame {
         try{
             int row = searchTable.getSelectedRow();
             int col = searchTable.getSelectedColumn();
-            String sql = "DELETE FROM " +tableCombo.getSelectedItem() + " WHERE " +  searchTable.getColumnName(0) + " = " + searchTable.getModel().getValueAt(row,0).toString();
+            String sql = "DELETE FROM " +tableCombo.getSelectedItem() + " WHERE id = " + searchTable.getModel().getValueAt(row,searchTable.getColumn("id").getModelIndex());
             DefaultTableModel model = (DefaultTableModel)searchTable.getModel();
             int modelRow = searchTable.convertRowIndexToModel(row);
             model.removeRow(modelRow);
@@ -526,7 +559,24 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_tableComboActionPerformed
 
     private void deleteButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButton1ActionPerformed
-        // TODO add your handling code here:
+        try{
+            int row = charTable.getSelectedRow();
+            String sql = "DELETE FROM character WHERE id = ?";
+            DefaultTableModel model = (DefaultTableModel)charTable.getModel();
+            int modelRow = charTable.convertRowIndexToModel(row);
+            model.removeRow(modelRow);
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, charTable.getModel().getValueAt(row,61).toString());
+            pst.executeUpdate();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }finally {
+            try{
+                rs.close();
+                pst.close();
+            } catch(Exception e) {}
+        }
+        this.getChars(pid, charTable);
     }//GEN-LAST:event_deleteButton1ActionPerformed
 
     private void updateButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButton1ActionPerformed
@@ -547,9 +597,12 @@ public class MainWindow extends javax.swing.JFrame {
             } catch(Exception e) {}
         }
     }//GEN-LAST:event_updateButton1ActionPerformed
-
+    /**
+    *   shows/hides the trademark red hat
+    * @param evt 
+    */
     private void burrisbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_burrisbuttonActionPerformed
-        hat.setVisible(true);
+        hat.setVisible(!hat.isVisible());
     }//GEN-LAST:event_burrisbuttonActionPerformed
 
     private void tabbedPaneFocusGained(java.awt.event.FocusEvent evt) {
@@ -566,6 +619,7 @@ public class MainWindow extends javax.swing.JFrame {
                 pst.close();
             } catch(Exception e) {}
         }
+        adminCTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         sql = "SELECT * FROM character";
         try{
             pst = conn.prepareStatement(sql);
@@ -581,6 +635,11 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * 
+     * @param table table to get stats for
+     * @return returns count of items as string
+     */
     private String getStats(String table){
         String sql = "SELECT COUNT(*) AS rows FROM " + table;
         int res = 0;
@@ -617,6 +676,12 @@ public class MainWindow extends javax.swing.JFrame {
         
     }
 
+    /**
+     * 
+     * @param query string to query
+     * @param toTable table to query from
+     * @param table table to populate results to
+     */
     public void search(String query, String toTable, JTable table){
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         String sql = "select * from " + toTable + " where name like ?";
@@ -669,11 +734,16 @@ public class MainWindow extends javax.swing.JFrame {
             } catch(Exception e) {}
         }
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable adminCTable;
     private javax.swing.JTable adminPTable;
     private javax.swing.JPanel adminPanel;
+    private javax.swing.JLabel bMode1;
+    private javax.swing.JLabel bMode2;
+    private javax.swing.JLabel bMode3;
+    private javax.swing.JLabel bMode4;
+    private javax.swing.JLabel bMode5;
     private javax.swing.JLabel bg;
     private javax.swing.JLabel bg2;
     private javax.swing.JButton burrisbutton;

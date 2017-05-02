@@ -8,6 +8,7 @@ package dndpt;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.*;
 
 /**
  *
@@ -26,14 +27,26 @@ public class Create_Char extends javax.swing.JFrame {
         initComponents();
         this.conn = conn;
         this.pid = pid;
-        spell1.setVisible(false);
-        spell2.setVisible(false);
-        spell3.setVisible(false);
-        spell4.setVisible(false);
         wep1.setVisible(false);
         wep2.setVisible(false);
         wep3.setVisible(false);
-        
+        String sql = "SELECT name FROM spell";
+        try {
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                String name = rs.getString("name");
+                spell1.addItem(name); spell2.addItem(name);
+                spell3.addItem(name); spell4.addItem(name);
+            }
+        } catch(Exception e) {}
+        finally {
+            try {
+                rs.close();
+                pst.close();
+            }catch (Exception e){}
+        }
+        System.out.println(ani.getName());
     }
 
     /**
@@ -127,19 +140,19 @@ public class Create_Char extends javax.swing.JFrame {
             }
         });
         getContentPane().add(cname);
-        cname.setBounds(80, 70, 150, 26);
+        cname.setBounds(80, 70, 150, 20);
 
         clevel.setText("#");
         getContentPane().add(clevel);
-        clevel.setBounds(270, 70, 30, 26);
+        clevel.setBounds(270, 70, 30, 20);
 
         cclass.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Sorcerer", "Wizard" }));
         getContentPane().add(cclass);
-        cclass.setBounds(320, 50, 114, 27);
+        cclass.setBounds(320, 50, 71, 20);
 
         cbg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acolyte", "Charlatan", "Criminal", "Entertainer", "Folk Hero", "Guild Artisan", "Hermit", "Noble", "Outlander", "Sage", "Sailor", "Soldier", "Urchin" }));
         getContentPane().add(cbg);
-        cbg.setBounds(510, 50, 100, 27);
+        cbg.setBounds(510, 50, 100, 20);
 
         pname.setText("YOU");
         getContentPane().add(pname);
@@ -147,69 +160,141 @@ public class Create_Char extends javax.swing.JFrame {
 
         crace.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dragonborn", "Dwarf", "Eladrin", "Elf", "Gnome", "Half-elf", "Half-orc", "Halfling", "Human", "Tiefling" }));
         getContentPane().add(crace);
-        crace.setBounds(420, 50, 90, 27);
+        crace.setBounds(420, 50, 90, 20);
 
         alignment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lawful Good", "Neutral Good", "Chaotic Good", "Lawful Neutral", "Neutral", "Chaotic Neutral", "Lawful Evil", "Neutral Evil", "Chaotic Evil" }));
         getContentPane().add(alignment);
-        alignment.setBounds(460, 80, 120, 27);
+        alignment.setBounds(460, 80, 120, 20);
 
-        group.setText("jTextField1");
+        group.setText("null;");
         getContentPane().add(group);
-        group.setBounds(590, 80, 110, 26);
+        group.setBounds(590, 80, 110, 20);
+
+        st_str.setName("Strength"); // NOI18N
+        st_str.setOpaque(false);
         getContentPane().add(st_str);
-        st_str.setBounds(120, 230, 20, 23);
+        st_str.setBounds(120, 230, 20, 21);
+
+        st_dex.setName("Dexterity"); // NOI18N
+        st_dex.setOpaque(false);
         getContentPane().add(st_dex);
-        st_dex.setBounds(120, 240, 20, 23);
+        st_dex.setBounds(120, 240, 20, 30);
+
+        st_con.setName("Constitution"); // NOI18N
+        st_con.setOpaque(false);
         getContentPane().add(st_con);
-        st_con.setBounds(120, 260, 20, 23);
+        st_con.setBounds(120, 260, 20, 20);
+
+        st_int.setName("Intelligence"); // NOI18N
+        st_int.setOpaque(false);
         getContentPane().add(st_int);
-        st_int.setBounds(120, 280, 20, 23);
+        st_int.setBounds(120, 280, 20, 21);
+
+        st_wis.setName("Wisdom"); // NOI18N
+        st_wis.setOpaque(false);
         getContentPane().add(st_wis);
-        st_wis.setBounds(120, 290, 20, 23);
+        st_wis.setBounds(120, 290, 20, 30);
+
+        st_cha.setName("Charisma"); // NOI18N
+        st_cha.setOpaque(false);
         getContentPane().add(st_cha);
-        st_cha.setBounds(120, 310, 20, 23);
+        st_cha.setBounds(120, 310, 20, 21);
+
+        acr.setName("Acrobatics"); // NOI18N
+        acr.setOpaque(false);
         getContentPane().add(acr);
-        acr.setBounds(120, 370, 20, 23);
+        acr.setBounds(120, 361, 20, 30);
+
+        ani.setName("Animal Handling"); // NOI18N
+        ani.setOpaque(false);
         getContentPane().add(ani);
-        ani.setBounds(120, 380, 20, 23);
+        ani.setBounds(120, 380, 20, 20);
+
+        arc.setName("Arcana"); // NOI18N
+        arc.setOpaque(false);
         getContentPane().add(arc);
-        arc.setBounds(120, 400, 20, 23);
+        arc.setBounds(120, 400, 20, 21);
+
+        ath.setName("Athletics"); // NOI18N
+        ath.setOpaque(false);
         getContentPane().add(ath);
-        ath.setBounds(120, 420, 20, 23);
+        ath.setBounds(120, 411, 20, 30);
+
+        dec.setName("Deception"); // NOI18N
+        dec.setOpaque(false);
         getContentPane().add(dec);
-        dec.setBounds(120, 430, 20, 23);
+        dec.setBounds(120, 430, 20, 30);
+
+        his.setName("History"); // NOI18N
+        his.setOpaque(false);
         getContentPane().add(his);
-        his.setBounds(120, 450, 20, 23);
+        his.setBounds(120, 450, 20, 21);
+
+        ins.setName("Insight"); // NOI18N
+        ins.setOpaque(false);
         getContentPane().add(ins);
-        ins.setBounds(120, 470, 20, 23);
+        ins.setBounds(120, 461, 20, 30);
+
+        inti.setName("Intimidation"); // NOI18N
+        inti.setOpaque(false);
         getContentPane().add(inti);
-        inti.setBounds(120, 480, 20, 23);
+        inti.setBounds(120, 480, 20, 21);
+
+        inv.setName("Investigation"); // NOI18N
+        inv.setOpaque(false);
         getContentPane().add(inv);
-        inv.setBounds(120, 500, 20, 23);
+        inv.setBounds(120, 491, 20, 30);
+
+        med.setName("Medicine"); // NOI18N
+        med.setOpaque(false);
         getContentPane().add(med);
-        med.setBounds(120, 520, 20, 23);
+        med.setBounds(120, 501, 20, 40);
+
+        nat.setName("Nature"); // NOI18N
+        nat.setOpaque(false);
         getContentPane().add(nat);
-        nat.setBounds(120, 530, 20, 23);
+        nat.setBounds(120, 530, 20, 21);
+
+        perc.setName("Perception"); // NOI18N
+        perc.setOpaque(false);
         getContentPane().add(perc);
-        perc.setBounds(120, 550, 20, 23);
+        perc.setBounds(120, 541, 20, 30);
+
+        perf.setName("Performance"); // NOI18N
+        perf.setOpaque(false);
         getContentPane().add(perf);
-        perf.setBounds(120, 570, 20, 23);
+        perf.setBounds(120, 561, 20, 30);
+
+        pers.setName("Persuasion"); // NOI18N
+        pers.setOpaque(false);
         getContentPane().add(pers);
-        pers.setBounds(120, 580, 20, 23);
+        pers.setBounds(120, 571, 20, 40);
+
+        rel.setName("Religion"); // NOI18N
+        rel.setOpaque(false);
         getContentPane().add(rel);
-        rel.setBounds(120, 600, 20, 23);
+        rel.setBounds(120, 600, 20, 21);
+
+        sle.setName("Sleight of Hand"); // NOI18N
+        sle.setOpaque(false);
         getContentPane().add(sle);
-        sle.setBounds(120, 620, 20, 23);
+        sle.setBounds(120, 611, 20, 30);
+
+        ste.setName("Stealth"); // NOI18N
+        ste.setOpaque(false);
         getContentPane().add(ste);
-        ste.setBounds(120, 630, 20, 23);
+        ste.setBounds(120, 630, 20, 21);
+
+        sur.setName("Survival"); // NOI18N
+        sur.setOpaque(false);
         getContentPane().add(sur);
-        sur.setBounds(120, 650, 20, 23);
+        sur.setBounds(120, 641, 20, 30);
 
         cstr.setForeground(new java.awt.Color(102, 102, 102));
         cstr.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         cstr.setText("15");
         getContentPane().add(cstr);
-        cstr.setBounds(50, 220, 40, 30);
+        cstr.setBounds(50, 210, 40, 40);
 
         ccha.setForeground(new java.awt.Color(102, 102, 102));
         ccha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -243,25 +328,25 @@ public class Create_Char extends javax.swing.JFrame {
 
         lang1.setText("language");
         getContentPane().add(lang1);
-        lang1.setBounds(50, 740, 67, 26);
+        lang1.setBounds(50, 740, 100, 20);
 
         lang2.setText("language");
         getContentPane().add(lang2);
-        lang2.setBounds(50, 760, 67, 26);
+        lang2.setBounds(50, 760, 100, 20);
 
         lang3.setText("language");
         getContentPane().add(lang3);
-        lang3.setBounds(50, 780, 67, 26);
+        lang3.setBounds(50, 780, 100, 20);
 
         inspiration.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         inspiration.setText("0");
         getContentPane().add(inspiration);
-        inspiration.setBounds(120, 150, 30, 26);
+        inspiration.setBounds(120, 150, 30, 20);
 
         initiative.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         initiative.setText("0");
         getContentPane().add(initiative);
-        initiative.setBounds(652, 170, 50, 26);
+        initiative.setBounds(652, 170, 50, 20);
 
         speed.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         speed.setText("25");
@@ -292,7 +377,7 @@ public class Create_Char extends javax.swing.JFrame {
             }
         });
         getContentPane().add(att_type);
-        att_type.setBounds(290, 500, 130, 27);
+        att_type.setBounds(290, 500, 130, 20);
 
         g.setForeground(new java.awt.Color(102, 102, 102));
         g.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -331,7 +416,7 @@ public class Create_Char extends javax.swing.JFrame {
         hp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         hp.setText("0");
         getContentPane().add(hp);
-        hp.setBounds(340, 260, 18, 26);
+        hp.setBounds(340, 260, 90, 20);
 
         hitDie.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         hitDie.setText("1d12");
@@ -344,26 +429,26 @@ public class Create_Char extends javax.swing.JFrame {
         hitDie.setBounds(520, 160, 90, 80);
 
         getContentPane().add(spell4);
-        spell4.setBounds(290, 440, 200, 27);
+        spell4.setBounds(290, 440, 200, 20);
 
         getContentPane().add(spell1);
-        spell1.setBounds(290, 350, 200, 27);
+        spell1.setBounds(290, 350, 200, 20);
 
         getContentPane().add(spell2);
-        spell2.setBounds(290, 380, 200, 27);
+        spell2.setBounds(290, 380, 200, 20);
 
         getContentPane().add(spell3);
-        spell3.setBounds(290, 410, 200, 27);
+        spell3.setBounds(290, 410, 200, 20);
 
         getContentPane().add(wep3);
-        wep3.setBounds(290, 410, 200, 27);
+        wep3.setBounds(290, 410, 200, 20);
 
         getContentPane().add(wep1);
-        wep1.setBounds(290, 350, 200, 27);
+        wep1.setBounds(290, 350, 200, 20);
 
         wep2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         getContentPane().add(wep2);
-        wep2.setBounds(290, 380, 200, 27);
+        wep2.setBounds(290, 380, 200, 20);
 
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/dndcharsheet copy.png"))); // NOI18N
         getContentPane().add(bg);
@@ -402,6 +487,10 @@ public class Create_Char extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    /**
+     * insert char statement
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String sql = "INSERT INTO character VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,";
         String sql2 = " ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,";
@@ -415,26 +504,50 @@ public class Create_Char extends javax.swing.JFrame {
             pst.setString(6, crace.getSelectedItem().toString()); pst.setString(7, alignment.getSelectedItem().toString());
             pst.setString(8, "0"); pst.setString(9, cstr.getText());  pst.setString(10, cdex.getText()); pst.setString(11, ccon.getText());
             pst.setString(12, cint.getText()); pst.setString(13, cwis.getText()); pst.setString(14, ccha.getText()); pst.setString(15, inspiration.getText());
-            pst.setString(16, "0"); pst.setString(17, "0"); pst.setString(25, pass_perc.getText());  pst.setString(26, lang1.getText()); pst.setString(27, lang2.getText());
+            pst.setString(16, "0"); pst.setString(25, pass_perc.getText());  pst.setString(26, lang1.getText()); pst.setString(27, lang2.getText());
             pst.setString(28, lang3.getText());  pst.setString(29, "10");  pst.setString(30, initiative.getText()); pst.setString(31, speed.getText());
             pst.setString(32, hp.getText()); pst.setString(33, hp.getText()); pst.setString(34, hitDie.getText()); pst.setString(35, "0"); pst.setString(36, "0");
-            pst.setString(40, g.getText()); pst.setString(41, s.getText()); pst.setString(42, c.getText());
+            pst.setString(40, g.getText()); pst.setString(41, s.getText()); pst.setString(42, c.getText()); 
             for (int i = 43; i < 52; i++){
                 pst.setString(i, "0");
             }
-            for (int i = 57; i <= 62; i++){
-                    pst.setString(i, "0");
-                }
+            for (int i = 56; i < 62; i++){
+                pst.setString(i, "0");
+            }
             pst.setString(52, traits.getText());
             
+            JCheckBox[] st = new JCheckBox[6];
+            st[0] = st_cha; st[1] = st_con; st[2] = st_dex; st[3] = st_int; st[4] = st_str; st[5] = st_wis;
+            JCheckBox[] sk = new JCheckBox[18];
+            sk[0] = acr; sk[1] = ani; sk[2] = arc; sk[3] = ath; sk[4] = dec; sk[5] = his; sk[6] = ins; sk[7] = perc; sk[8] = inv;
+            sk[9] = med; sk[10] = nat; sk[11] = perf; sk[12] = pers; sk[13] = rel; sk[14] = sle; sk[15] = ste; sk[16] = sur; sk[17] = inti;
+            int count = 0;
+            for (int i = 0; i < st.length-1; i++){
+                System.out.println(st[i].getName());
+                if (st[i].isSelected()){
+                    pst.setString(count+17, st[i].getName());
+                    count++;
+                }
+                if ((count + 1) > 3)
+                    break;
+            }
+            count = 0;
+            for (int i = 0; i < sk.length-1; i++){
+                if (sk[i].isSelected()){
+                    pst.setString(count+20, sk[i].getName());
+                    count++;
+                }
+                if ((count + 1) > 5)
+                    break;
+            }
             String selection = att_type.getSelectedItem().toString();
             if (selection.equals("Magical")) {
                 pst.setString(37, "0"); pst.setString(38, "0"); pst.setString(39, "0");
                 //53-61
-                pst.setString(54, getID("spell", spell1.getSelectedItem().toString())); 
-                pst.setString(55, getID("spell", spell2.getSelectedItem().toString())); 
-                pst.setString(56, getID("spell", spell3.getSelectedItem().toString()));
-                pst.setString(57, getID("spell", spell4.getSelectedItem().toString()));
+                pst.setString(53, getID("spell", spell1.getSelectedItem().toString())); 
+                pst.setString(54, getID("spell", spell2.getSelectedItem().toString())); 
+                pst.setString(55, getID("spell", spell3.getSelectedItem().toString()));
+                pst.setString(56, getID("spell", spell4.getSelectedItem().toString()));
                 for (int i = 37; i < 40; i++){
                     pst.setString(i, "0");
                 }
@@ -446,17 +559,27 @@ public class Create_Char extends javax.swing.JFrame {
                 pst.setString(37, getID("equipment", wep1.getSelectedItem().toString()));
                 pst.setString(38, getID("equipment", wep2.getSelectedItem().toString()));
                 pst.setString(39, getID("equipment", wep3.getSelectedItem().toString()));
-            }System.out.println("CHECK");
+            }
             pst.executeUpdate();
         } catch(Exception e) {
-            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
+        this.setVisible(false);
+        this.dispose();
+            
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void hitDieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hitDieActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_hitDieActionPerformed
 
+    /**
+     * gets ID of a selected item given name, table
+     * @param table table to query from
+     * @param name name to search for
+     * @return 
+     */
     public String getID(String table, String name) {
         String sql = "SELECT id, name FROM " + table + " WHERE name = ?";
         int result = 0;
@@ -475,10 +598,13 @@ public class Create_Char extends javax.swing.JFrame {
                 tpst.close();
             } catch (Exception e) {}
         }
-        System.out.println(result);
         return Integer.toString(result);
     }
     
+    /**
+     * shows input types based on attack type
+     * @param evt 
+     */
     private void att_typeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_att_typeActionPerformed
         String selection = att_type.getSelectedItem().toString();
         if (selection.equals("Magical")){
@@ -498,7 +624,6 @@ public class Create_Char extends javax.swing.JFrame {
                     spell1.addItem(name); spell2.addItem(name);
                     spell3.addItem(name); spell4.addItem(name);
                 }
-                
             } catch(Exception e) {}
             finally {
                 try {
@@ -506,7 +631,6 @@ public class Create_Char extends javax.swing.JFrame {
                     pst.close();
                 }catch (Exception e){}
             }
-                
         } else {
             spell1.setVisible(false);
             spell2.setVisible(false);
@@ -525,7 +649,6 @@ public class Create_Char extends javax.swing.JFrame {
                     wep1.addItem(name); wep2.addItem(name);
                     wep3.addItem(name);
                 }
-                
             } catch(Exception e) {}
             finally {
                 try {
@@ -534,7 +657,6 @@ public class Create_Char extends javax.swing.JFrame {
                 }catch (Exception e){}
             }
         } 
-                
     }//GEN-LAST:event_att_typeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
