@@ -1,3 +1,0 @@
-# DNDPT
-DnD PlayerTracker
-tahw
