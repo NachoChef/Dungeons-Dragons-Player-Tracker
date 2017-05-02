@@ -1,13 +1,17 @@
-# DNDPT
-DnDPlayerTracker
+![alt text](https://github.com/NachoChef/Dungeons-Dragons-Player-Tracker/blob/dontfuckmeup/src/Resources/dndlogo.png "DNDPT logo")
+DnD Player Tracker
+======
+-This is a database-driven program developed for a semester-long class project. The program allows player and character tracking for the game Dungeons & Dragons, 3.5ed.
 
-todo:
----------------
-1. ~~login function~~ - COMPLETE
-2. ~~delete function~~ - COMPLETE
-3. ~~search function~~ - COMPLETE
-4. update function
-5. ~~create function~~ - COMPLETE (for player)
-6. UI completion  - In progress
-7. ~~complete database/jdbc connection~~  - COMPLETE
-8. ~~(Optional) Make the database file something linked to (like a dropbox database)~~ - COMPLETE
+#Description
+--------------
+-Administrators may modify all databases, including adding or removing administrators/players.
+-Players may create characters and update owned characters.
+-Remote database utility is available to connect to a SQLServer 2008 database. Generic database file is included in root git.
+
+##Todo
+--------------
+-Update database system for DnD 5e.
+-Implement PDF output/OCR PDF input
+-Redo character creation/display
+
